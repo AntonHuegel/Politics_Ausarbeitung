@@ -14,6 +14,37 @@ Der in  \cite{LuB} vorgestellte Ansatz beschränkt die manuelle Arbeit auf eine 
 \item Mittels der Wortfrequenzen und den zugehörigen Word-Scores kann nun auf eine Position in der zu Beginn festgelegten Skala zurückgerechnet werden wodurch man eine Einordnung des Virgin-Texts erhält.  
 \end{itemize}
 
+
+Konkret werden die folgenden Berechnungen durchgeführt: \\
+Seien zu $m\in\N$ die Reference-Texte  $R_1,\ldots,R_M$ und zu $N\in\N$ Virgin-Texte $V_1,\ldots,V_N$ gegeben. 
+Mit $a=(a_i)_{i=1}^M\in\R^M$ habe man eine a priorie Einordnung der Reference-Texte zur Verfügung, 
+das heißt zu einer festgelegten Dimension $D$ sei $a_i$ die Positionierung von $R_i$, $i=1,\ldots,M$. 
+Weiter sei durch $W_1,\ldots,W_K$ mit $K\in\N$ und $W_i\neq W_j$ für $i\neq j$ 
+eine Auflistung aller in $R_1,\ldots,R_M$ vorkommenden Wörter gegeben, 
+wobei die Äquivalenzrelation $W_i = W_j$ noch zu bestimmen ist. 
+Nun ist die relative Häufigkeit $F_{wr}$ des Wortes $W_w$ in Text $R_r$ durch
+\begin{displaymath}
+F_{wr} = \frac{|\{W\in R_r:\quad W=W_w  \}|}{|\{W\in R_r\}|}
+\end{displaymath}
+gegeben. Hieraus erhält man mit
+\begin{displaymath}
+P_{wr} = \frac{F_{wr}}{\sum_{s=1}^M F_{ws}}
+\end{displaymath}
+unmittelbar die Laplace'sche Wahrscheinlichkeit beim lesen des Wortes $W_w$ den Text $R_r$ vor sich zu haben. Nun definiert man den Word-Score $S_{w}$ des Wortes $W_w$ auf Dimension $D$ als
+\begin{displaymath}
+S_w = \sum_{r=1}^M a_r P_{wr}.
+\end{displaymath}
+Die Positionierungen aller ein Wort enthaltender Texte fließt also in Abhängigkeit deren Wahrscheinlichkeit in die so gewichtete Positionierung eines jeden Wortes ein, welche dann Score genannt wird. Nun kann mittels dieser Word-Scores die Positionierung der Virgin-Texte berechnet werden. Ist $F_{wv}$ die analog definierte relative Häufigkeit des Wortes $W_w$ im Virgin-Text $V_v$, so ist kann $V_v$ auf $D$ durch den Score
+\begin{displaymath}
+S_v = \sum_{w=1}^K F_{wv} S_w
+\end{displaymath}
+positioniert werden. \\
+Die Einordnung der $V_i$ befindet sich aber auf Grund der gemeinsamen Wort-Menge mit allen Reference-Texten auf einer anderen Skala, als die a priorie Einschätzung $a$. 
+Daher muss noch eine Normierung durchgeführt werden. Laver und Benoit schlagen folgende Anpassung vor: \\
+Sei $\bar{S_v}$ der Mittelwert aller Virgin-Scores und $\Std(S_v),~\Std(a)$ die Standardabweichung der Virgin-Scores bzw. der a priorie Einordnung Reference-Texte. Die normierten Größen $S_v*$ erhält man nun durch
+\begin{displaymath}
+S_v* = (S_v - \bar{S_v}) \frac{\Std(S_v)}{\Std(a)} +\bar{S_v}. 
+\end{displaymath} 
  
  
 
