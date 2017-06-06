@@ -1,6 +1,22 @@
 % Teil Anton
 
 \section{Laver und Benoit: \enquote{Extracting Policy Positions from Political Texts Using Words as Data}  }
+In einer Veröffentlichung von Laver und Benoit \cite{LuB} wird eine Methode vorgestellt, bei welcher ohne die Berücksichtigung der semantischen Aussagen eines Textes eine politische Einordnung möglich sein soll, in dem die Wörter als Daten verwendet werden. 
+Schon länger ist es ein Anliegen, politische Texte mit objektiven Kriterien in ein gegebenes Spektrum einzuordnen. Verschiede Ansätze beinhalten \enquote{Expert Surveys}, bei welchen die Einschätzungen von Experten herangezogen werden, und \enquote{Crowd Sourcing}, bei welchem die Beurteilungen einer großen Mege Laien verwendet wird. Beide Methoden haben den Nachteil, dass für die Beurteilung einer jeden Quelle ein hoher manuellen Arbeitsaufwand nötig ist, um Ergebnisse zu erzielen. \\
+Der in  \cite{LuB} vorgestellte Ansatz beschränkt die manuelle Arbeit auf eine konstante Vorleistung, die erbracht werden muss um eine Datenbasis zu generieren, und ermöglicht anschließend die vollautomatische Beurteilung von Texten. Die Idee dabei ist, der Häufigkeit wie oft ein bestimmtes Wort in einem Text in Abhängigkeit dessen Länge vorkommt eine Bedeutung beizumessen. 
+\begin{itemize}
+\item Zunächst werden sogenannte \emph{Reference-Texte} benötigt, deren Einordnung in einer politischen Dimension durch Expert-Surveys oder Crowd-Sourced-Analysis gegeben ist.
+\item In jedem der Reference-Texte wird die Häufigkeit aller darin vorkommender Wörter gezählt und durch die Gesamtzahl der Wörter des Textes geteilt, wodruch man die sogenannten Wortfrequenzen erhält.
+\item Den Wörtern wird nun in Abhängigkeit ihrer Wortfrequenz eine Beteiligung am Zustandekommen der Ausrichtung des Textes zugesprochen. Wörter mit hoher Frequenz sind in hohem Maße für die Positionierung des Texts verantwortlich, Wörter mit niedriger Frequenz in geringem Maße.
+\item Über die Frequenzen der Wörter lässt sich bestimmten, mit welcher Wahrscheinlichkeit man einen bestimmten Text vor sich hat, wenn gegeben ist, dass ein gewisses Wort in ihm enthalten ist.
+\item So kann jedem Wort ein sogenannter Word-Score zugesprochen werden. Er sagt aus, wie sehr ein Wort den Text, der es enthält, in eine gewisse Richtung drückt.
+\item Nun werden die Wortfrequenzen des zu untersuchenden Texts bestimmt. Dieser Text wird \emph{Virgin-Text} genannt.
+\item Mittels der Wortfrequenzen und den zugehörigen Word-Scores kann nun auf eine Position in der zu Beginn festgelegten Skala zurückgerechnet werden wodurch man eine Einordnung des Virgin-Texts erhält.  
+\end{itemize}
+
+ 
+ 
+
   \subsection{Abgrenzung zu anderen Methoden}
   \subsection{A priori Aproach vs Inductive Analysis}
   \subsection{Choosing Reference and Virgin Texts}
