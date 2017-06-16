@@ -1,9 +1,68 @@
 % Teil Anton
 
 \section{Laver und Benoit: \enquote{Extracting Policy Positions from Political Texts Using Words as Data}  }
+In einer Veröffentlichung von Laver und Benoit \cite{LuB} wird eine Methode vorgestellt, bei welcher ohne die Berücksichtigung der semantischen Aussagen eines Textes eine politische Einordnung möglich sein soll, in dem die Wörter als Daten verwendet werden. 
+Schon länger ist es ein Anliegen, politische Texte mit objektiven Kriterien in ein gegebenes Spektrum einzuordnen. Verschiede Ansätze beinhalten \enquote{Expert Surveys}, bei welchen die Einschätzungen von Experten herangezogen werden, und \enquote{Crowd Sourcing}, bei welchem die Beurteilungen einer großen Mege Laien verwendet wird. Beide Methoden haben den Nachteil, dass für die Beurteilung einer jeden Quelle ein hoher manuellen Arbeitsaufwand nötig ist, um Ergebnisse zu erzielen. \\
+Der in  \cite{LuB} vorgestellte Ansatz beschränkt die manuelle Arbeit auf eine konstante Vorleistung, die erbracht werden muss um eine Datenbasis zu generieren, und ermöglicht anschließend die vollautomatische Beurteilung von Texten. Die Idee dabei ist, der Häufigkeit wie oft ein bestimmtes Wort in einem Text in Abhängigkeit dessen Länge vorkommt eine Bedeutung beizumessen. 
+\begin{itemize}
+\item Zunächst werden sogenannte \emph{Reference-Texte} benötigt, deren Einordnung in einer politischen Dimension durch Expert-Surveys oder Crowd-Sourced-Analysis gegeben ist.
+\item In jedem der Reference-Texte wird die Häufigkeit aller darin vorkommender Wörter gezählt und durch die Gesamtzahl der Wörter des Textes geteilt, wodruch man die sogenannten Wortfrequenzen erhält.
+\item Den Wörtern wird nun in Abhängigkeit ihrer Wortfrequenz eine Beteiligung am Zustandekommen der Ausrichtung des Textes zugesprochen. Wörter mit hoher Frequenz sind in hohem Maße für die Positionierung des Texts verantwortlich, Wörter mit niedriger Frequenz in geringem Maße.
+\item Über die Frequenzen der Wörter lässt sich bestimmten, mit welcher Wahrscheinlichkeit man einen bestimmten Text vor sich hat, wenn gegeben ist, dass ein gewisses Wort in ihm enthalten ist.
+\item So kann jedem Wort ein sogenannter Word-Score zugesprochen werden. Er sagt aus, wie sehr ein Wort den Text, der es enthält, in eine gewisse Richtung drückt.
+\item Nun werden die Wortfrequenzen des zu untersuchenden Texts bestimmt. Dieser Text wird \emph{Virgin-Text} genannt.
+\item Mittels der Wortfrequenzen und den zugehörigen Word-Scores kann nun auf eine Position in der zu Beginn festgelegten Skala zurückgerechnet werden wodurch man eine Einordnung des Virgin-Texts erhält.  
+\end{itemize}
+
+
+Konkret werden die folgenden Berechnungen durchgeführt: \\
+Seien zu $m\in\N$ die Reference-Texte  $R_1,\ldots,R_M$ und zu $N\in\N$ Virgin-Texte $V_1,\ldots,V_N$ gegeben. 
+Mit $a=(a_i)_{i=1}^M\in\R^M$ habe man eine a priorie Einordnung der Reference-Texte zur Verfügung, 
+das heißt zu einer festgelegten Dimension $D$ sei $a_i$ die Positionierung von $R_i$, $i=1,\ldots,M$. 
+Weiter sei durch $W_1,\ldots,W_K$ mit $K\in\N$ und $W_i\neq W_j$ für $i\neq j$ 
+eine Auflistung aller in $R_1,\ldots,R_M$ vorkommenden Wörter gegeben, 
+wobei die Äquivalenzrelation $W_i = W_j$ noch zu bestimmen ist. 
+Nun ist die relative Häufigkeit $F_{wr}$ des Wortes $W_w$ in Text $R_r$ durch
+\begin{displaymath}
+F_{wr} = \frac{|\{W\in R_r:\quad W=W_w  \}|}{|\{W\in R_r\}|}
+\end{displaymath}
+gegeben. Hieraus erhält man mit
+\begin{displaymath}
+P_{wr} = \frac{F_{wr}}{\sum_{s=1}^M F_{ws}}
+\end{displaymath}
+unmittelbar die Laplace'sche Wahrscheinlichkeit beim lesen des Wortes $W_w$ den Text $R_r$ vor sich zu haben. Nun definiert man den Word-Score $S_{w}$ des Wortes $W_w$ auf Dimension $D$ als
+\begin{displaymath}
+S_w = \sum_{r=1}^M a_r P_{wr}.
+\end{displaymath}
+Die Positionierungen aller ein Wort enthaltender Texte fließt also in Abhängigkeit deren Wahrscheinlichkeit in die so gewichtete Positionierung eines jeden Wortes ein, welche dann Score genannt wird. Nun kann mittels dieser Word-Scores die Positionierung der Virgin-Texte berechnet werden. Ist $F_{wv}$ die analog definierte relative Häufigkeit des Wortes $W_w$ im Virgin-Text $V_v$, so ist kann $V_v$ auf $D$ durch den Score
+\begin{displaymath}
+S_v = \sum_{w=1}^K F_{wv} S_w
+\end{displaymath}
+positioniert werden. \\
+Die Einordnung der $V_i$ befindet sich aber auf Grund der gemeinsamen Wort-Menge mit allen Reference-Texten auf einer anderen Skala, als die a priorie Einschätzung $a$. 
+Daher muss noch eine Normierung durchgeführt werden. Laver und Benoit schlagen folgende Anpassung vor: \\
+Sei $\bar{S_v}$ der Mittelwert aller Virgin-Scores und $\Std(S_v),~\Std(a)$ die Standardabweichung der Virgin-Scores bzw. der a priorie Einordnung Reference-Texte. Die normierten Größen $S_v*$ erhält man nun durch
+\begin{displaymath}
+S_v* = (S_v - \bar{S_v}) \frac{\Std(S_v)}{\Std(a)} +\bar{S_v}. 
+\end{displaymath} 
+ 
+ 
+
   \subsection{Abgrenzung zu anderen Methoden}
   \subsection{A priori Aproach vs Inductive Analysis}
   \subsection{Choosing Reference and Virgin Texts}
+  Ein bedeutender Schritt ist die sinnvolle Wahl von Refernce- und Virgin-Texten. Mit Begriffen der Linearen Algebra gesprochen, ist es Aufgabe der Reference-Texte den Raum politischer Positionen aufzuspannen, in welchem die Virgin-Texte dann einen Punkt zugewiesen bekommen. Die Refernce-Texte müssen also eine Vektorraumbasis darstellen, die Virgin-Texte müssen Elemente eben dieses Vekotrraums sein. \\
+  Laver und Benoit \cite{LuB} geben einige Hinweise, was bei der Wahl von Reference-Texten zu beachten ist. \\
+  Zunächst muss für alle in Betracht gezogenen Reference-Texte eine a priori Einordnung auf der Dimension gegeben sein, die untersucht werden soll. \\
+  Zweitens sollte der Reference-Text dasselbe Vokabular verwenden, wie der Virgin-Text, dessen Einordnung gewünscht ist. Daraus ergibt sich, dass rein schriftlich publizierte Texte, wie Parteiprogramme oder Essays wenig geeignet sind als Referenz für mündlich präsentierte Texte, wie Parlamentsreden oder Talk-Show-Beiträge zu dienen. Auch beim Vergleich von Beiträgen in Medien mit geringerem Anspruch an Formalität, wie soziale Netzwerke, und solchen mit sehr formaler Sprache, zum Beispiel wissenschaftliche Arbeiten, ist Vorsicht geboten. \\
+  Drittens sind Reference-Texte damit sie ihre oben erwähnte Basis-Eigenschaft erhalten so zu wählen, dass sie den gesamten Raum politischer Positionen auf gewählter Dimension aufspannen. Haben alle Referenc-Texte ähnliche Positionen zum betrachteten Thema, so sind sie nicht geeignet. Ebenso, wenn ein die gewählte Dimension betreffendes Thema gar nicht behandelt wird.  \\
+  Viertens sollten möglichst viele Wörter durch die Reference-Texte auf ihren jeweiligen Word-Score abgebildet werden, damit diese gegebenenfalls zur Bestimmung der Position des Virign-Textes verwendet werden können und damit zufällige Häufigkeiten einzelner Wörter weniger ins Gewicht fallen.  \\
+  Diese Überlegungen veranlassen uns, die Texte des Manifesto-Projects als Reference-Texte zu verwenden: Parteiprogramme aller Parteien haben das formale Vokanbular eines schriftlichen Textes, ohne die Fremdwort-Fülle einer wissenschaftlichen Arbeit aufzuweisen. Parteiprogramme sind recht lang und decken alle gesellschaftlich relevanten Theman ab. Durch die kombination von Parteiprogrammen aller demokratischen Parteien sind auch alle demokratischen Positionen vertreten, der gesamte Raum wird aufgespannt. Zuletzt und an wichtigsten: Durch die vorhandene Einordnung der der Texte auf einer Vielzahl politischer Positionen ist es uns erst möglich diese als Referenz zu werden. 
+  
+  
+  
+  
+  
   \subsection{Word Scores and Interpretation}
   
 \section{Matalab Programm zur Impelementierung des eben dargestellten Vorgangs mit Import der Texte aus SQL-Datenbank}
