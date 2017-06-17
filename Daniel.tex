@@ -1,5 +1,7 @@
 % Teil Daniel
 
+\definecolor{rahmen}{rgb}{1,.7,.7}
+
 \section{Akquirierung von Texten}
 Um politische Texte analysieren zu können müssen zuallererst passende Texte beschafft werden. Quellen für solche Texte sind verschiedene vorhanden, welche mehr oder weniger gut geeignet sind, um automatisch analysiert zu werden. Im Folgenden werden drei Kategorien kurz vorgestellt.
 
@@ -22,12 +24,87 @@ Im Zuge der Textverarbeitung trifft man immer wieder auf den Begriff der Datenba
 \item DELETE
 \end{enumerate}
 Logische Bedingungen können, wie in anderen Sprachen auch, mit in die Abfragen integriert werden. Diese werden durch einige zusätzliche Funktionen unterstützt. Beispielsweise lassen sich die Länge von Texten oder Mittelwerte schnell berechnen und in die logische Bedingung integrieren.
+Wichtig hierbei ist ebenfalls der Begriff der Normalisierung. Um Konsitenz zu wahren und Redundanzen zu vermeiden existieren verschiedene Normalformen:
+\begin{enumerate}
+\item 1NF - Erste Normalform
+\item 2NF - Zweite Normalform
+\item 3NF - Dritte Normalform
+\item BCNF - Boyce-Codd Normalform
+\end{enumerate}
+Die Formen sind hierbei anhand ihrer Striktheit aufsteigend angeordnet. Als ein Beispiel aus dem Kontext der politischen Textanalyse wird ein kurzes Schema zur Speicherung politischer Texte vorgestellt. Relevante Informationen sind hierbei die Herkunft des Textes (Politiker, Partei) sowie eine eindeutige Zuordnung anhand einer Identifikationsnummer. \\
+\begin{tabular}{llllll}
+\hline
+ID & Partei & Kürzel & Vorname & Nachname & Text \\
+\hline
+1 & Christlich Demokratische Union & CDU & Angela & Merkel & Text1 \\
+2 & Christlich Demokratische Union & CDU & Angela & Merkel & Text2 \\
+3 & Christlich Demokratische Union & CDU & Angela & Merkel & Text3 \\
+4 & Christlich Demokratische Union & CDU & Angela & Merkel & Text4 \\
+5 & Sozialdemokratische Partei Deutschlands & SPD & Sigmar & Gabriel & Text5 \\
+\hline
+\end{tabular}
+Offensichtlich werden hier die Daten der Partei sowie der Politiker redundant gespeichert, was suboptimal ist. Um einer möglichst hohen Normalform zu entsprechen wird die Tabelle in drei Tabellen aufgespalten: Je eine Tabelle für die Parteien, die Politiker und die Texte: \\
+\begin{tabular}{lll}
+\hline
+ID & Partei & Kürzel \\
+\hline
+1 & Christlich Demokratische Union & CDU \\
+2 & Sozialdemokratische Partei Deutschlands & SPD \\
+\hline
+\end{tabular}
+\\
+\begin{tabular}{llll}
+\hline
+ID & Vorname & Nachname & Partei-ID\\
+\hline
+1 & Angela & Merkel & 1\\
+2 & Sigmar & Gabriel & 2\\
+\hline
+\end{tabular}
+\begin{tabular}{lll}
+\hline
+ID & Politiker-ID & Text \\
+\hline
+1 & 1 & Text1 \\
+2 & 1 & Text2 \\
+3 & 1 & Text3 \\
+4 & 1 & Text4 \\
+5 & 2 & Text5 \\
+\hline
+\end{tabular}
+\\
+Die Identifikationsnummer aller drei Tabellen kommt hierbei auch als Schlüssel ins Spiel. Über den Schlüssel bzw. Index können Einträge in einer Tabelle eindeutig identifiziert werden, was sehr effiziente Abfragen ermöglicht. Andererseits werden eben jene IDs in anderen Tabellen als sogenannte Fremdschlüssel verwendet: Sie zeigen auf Schlüssel anderer Tabellen, um Redundanzen zu vermeiden. In obigem Beispiel sind die \textit{Partei-ID} und die \textit{Politiker-ID} Fremdschlüssel. Im Hinblick auf Fremdschlüssel ist besonders auf die Konsistenz der Datensätze zu achten. Wäre beispielsweise der Politiker \textit{Sigmar Gabriel} nicht vorhanden, also die \textit{Politiker-ID} 2 nicht vergeben, so würden die anderen Tabellen auf ungültige Datensätze verweisen.
 
 \section{Textvorverarbeitung}
-    \subsection{Zeichenkodierung}
-    \subsection{Reguläre Ausdrücke	}
-    \subsection{Deutsche Grammatik	}
-    \subsection{Morphologie Datenbank	}
-    \subsection{Synonym Datenbank}
+
+Da die Texte, so wie sie im Internet zur Verfügung gestellt werden, für das Lesen durch den Menschen optimiert sind, müssen noch einige zusätzliche Schritte ausgeführt werden, damit die Daten auch effektiv durch den Computer ausgewertet werden können. Anhand von zwei kurzen Beispielen wird die Notwendigkeit hierfür deutlich:
+
+\colorbox{rahmen}{"Wir} wollen scheinbare \colorbox{rahmen}{Gegensätze} verbinden\colorbox{rahmen}{. Umweltschutz} muss nicht wie bei \colorbox{rahmen}{Rot-Grün} die \colorbox{rahmen}{Wirtschaft} fesseln\colorbox{rahmen}{. Man} kann die \colorbox{rahmen}{Sicherheit stärken}, ohne \colorbox{rahmen}{Bürgerrechte einzuschränken. Soziale Verantwortung übernimmt} man besser mit \colorbox{rahmen}{Bildung} als mit \colorbox{rahmen}{Umverteilung.}"
+
+\colorbox{rahmen}{wir} wollen scheinbare \colorbox{rahmen}{gegensaetze} verbinden umweltschutz muss nicht wie bei rot gruen \colorbox{rahmen}{die} wirtschaft fesseln man \colorbox{rahmen}{kann die} sicherheit staerken ohne buergerrechte einzuschraenken soziale verantwortung \colorbox{rahmen}{uebernimmt} man \colorbox{rahmen}{besser} mit bildung als mit umverteilung
+
+\colorbox{rahmen}{ich} wollen scheinbare gegensatz verbinden umweltschutz muss nicht \colorbox{rahmen}{wie} bei rot gruen \colorbox{rahmen}{der} wirtschaft fesseln \colorbox{rahmen}{man} koennen \colorbox{rahmen}{der} sicherheit staerken \colorbox{rahmen}{ohne} buergerrechte einschraenken soziale verantwortung uebernehmen \colorbox{rahmen}{man} gut \colorbox{rahmen}{mit} bildung \colorbox{rahmen}{als mit} umverteilung
+
+wollen scheinbare gegensatz verbinden umweltschutz muss nicht rot gruen wirtschaft fesseln koennen sicherheit staerken buergerrechte einschraenken soziale verantwortung uebernehmen gut bildung umverteilung
+
+\subsection{Zeichenkodierung}
+\subsection{Reguläre Ausdrücke	}
+Reguläre Ausdrücke werden in der Informationsverarbeitung bestimmte Muster aus Texten erkennen und extrahieren zu können. Das zu erkennende Muster wird hierbei ebenfalls als Zeichenkette mit spezieller Syntax übergeben. Hierbei werden über lateinische Zeichen, arabische Ziffern bis hin zu diversen Sonderzeichen die meisten Anwendungsfälle abgedeckt.
+Eine sehr häufige Verwendung finden reguläre Ausdrücke im Bereich der Validierung von Nutzereingaben auf Webseiten, insbesondere in Formularen zur Datenübergabe. Einige bekannte Beispiele hierfür sind:
+\newline
+\begin{tabular}{llll}
+\hline
+Name & Ausdruck & Beispiel \\
+\hline
+Postleitzahl & /[0-9]{5}/ & 87700 \\
+Vorname/Nachname & /[a-zA-Z]+/ & Peter Lustig \\
+E-Mail & /[a-zA-Z]+@[a-zA-Z]+.(de|com|net)/ & anonymous@uni-ulm.de \\
+Telefonnummer & /[0-9]+[ -]{1,3}[0-9 ]{4,}/ & 0190 - 123 456 \\
+\hline
+\end{tabular}
+
+\subsection{Deutsche Grammatik	}
+\subsection{Morphologie Datenbank	}
+\subsection{Synonym Datenbank}
 
 \section{CMP Manifesto Project}
