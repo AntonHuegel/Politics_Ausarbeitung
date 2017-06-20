@@ -104,7 +104,93 @@ Telefonnummer & /[0-9]+[ -]{1,3}[0-9 ]{4,}/ & 0190 - 123 456 \\
 \end{tabular}
 
 \subsection{Deutsche Grammatik	}
+Im deutschen lassen sich Worte durch sogenannte Wortarten kategorisieren. Zu den Wortarten zählen: \\
+\begin{tabular}{ll}
+\hline
+Wort & Beispiel \\
+\hline
+Nomen & Politiker, Partei \\
+Artikel & der, die \\
+Pronomen & dieser, dieses \\
+Adjektive & rot, liberal \\
+Verben & wählen, senken \\
+Adverbien & schnell, laut \\
+Konjunktionen & und, oder \\
+Präpositionen & an, auf \\
+\hline
+\end{tabular} \\
+Im allgemeinen können viele Sätze auf eine Grundform reduziert werden: Subjekt - Verb - Objekt. Anhand dieser Form ist es für ein Programm einfach,
+einen Aussage aus einem Satz herauszuarbeiten. Da Sätze jedoch häufig verschachtelt und detaillierter ausformuliert sind, müssen diese weitestgehend vereinfacht
+werden. Ein Schritt hierzu ist das Entfernen nicht-sinngebender Wortarten aus dem Text, also solcher Worte, die selbst keine essentielle Information beitragen 
+sondern lediglich zur Wahrung der grammatikalischen Korrektheit im Text vorhanden sind. Die Wortarten im Text reduzieren sich damit auf Nomen, Adjektive, Verben
+und Adverbien.
+Ein zweiter Schritt ist das Reduzieren eben jener Wortformen auf ihre grammatikalische Grundform. Die Änderung ab von der Grundform nennt man bei Verben Konjugation
+und bei Nomen Deklination. Die Variation der Wörter hängt hierbei von vielen verschiedenen Faktoren ab, beispielsweise der Zeitform oder der Person.
+
 \subsection{Morphologie Datenbank	}
 \subsection{Synonym Datenbank}
+\section{Comparative Manifesto Project}
+Das Comparative Manifesto Project, kurz CMP, beschäftigt sich mit der Analyse politischer Texte und Standpunkte einer Vielzahl von Ländern und Parteien weltweit. Als Resultat stehen dem Nutzer der CMP Datenbank ausgiebige Informationen über die jeweiligen Texte zur Verfügung - und zwar in maschinell verwertbarer Form.
+Das Auswerten der Texte erfolgt jedoch nicht durch ein Programm, sondern manuell durch eine effiziente Aufteilung auf verschiedene Arbeiter. Dieses Vorgehen wird Crowd-Sourcing genannt. Dabei werden die Texte in kompakte Pakete aufgeteilt und weltweit an verschiedene Arbeiter verteilt. Dieses Vorgehen hat einige Vorteile:
+\begin{enumerate}
+\item Der Arbeiter hat nicht den ganzen Text zur Verfügung und muss daher den Teiltext objektiv und ohne Zusammenhang einordnen. Im Kontext des gesamten Textes könnten sonst subjektive Eindrücke das Ergebnis verfälsche.
+\item Identische Teiltexte können an unterschiedliche Arbeiter verteilt werden. So lassen sich subjektive Einstellungen der Arbeiter herausfiltern. Für eine steigende Zahl an Arbeitern kann so ein möglichst objektives Ergebnis erzielt werden.
+\end{enumerate}
+Als Ergebnis der Teilarbeit erhält man nun die Einordnung des Textes in ein Schema aus 56 Kategorien und Subkategorien. Diese Kategorien sollen das ganze politische Spektrum sinnvoll abbilden können. Die Hauptkategorien hierbei sind:
+\begin{enumerate}
+\item External Relations
+\item Freedom and Democracy
+\item Political System
+\item Economy
+\item Welfare and Quality of Life
+\item Fabric of Society
+\item Social Groups
+\end{enumerate}
+Diese lassen sich wiederum in Subkategorien einteilen um das Ergebnis detaillierter darstellen zu können. Da jede Aussage eines Textes solch einer Kategorie zugeordnet wird, erhält man so eine 56-dimensionale Darstellung des Textes, wobei jede Dimension eine politische Richtung darstellt.
+Das Manifesto Project enthält seit 1945 ungefähr 4000 Texte von über 1000 Parteien aus mehr als 50 verschiedenen Ländern.
+Die Daten können manuell über eine minimalistische Oberfläche abgefragt werden. Alternativ steht, nach einer initialen Registrierung, auch eine API zur automatischen Abfrage zur Verfügung.
 
-\section{CMP Manifesto Project}
+\section{Repräsentative Demokratie in Deutschland}
+\begin{quote}
+"Die repräsentative Demokratie bezeichnet eine demokratische Herrschaftsform, bei der politische Entscheidungen und die Kontrolle der Regierung nicht unmittelbar vom Volk, sondern von einer Volksvertretung, zum Beispiel dem Parlament, ausgeübt werden.
+Bürgerinnen und Bürger treffen politische Entscheidungen nicht selbst, sondern überlassen sie auf Zeit gewählten Vertretern, die für sie als Stellvertreter tätig sind. Die Bürger beteiligen sich aber an Wahlen und wirken in Parteien, Verbänden und Initiativen mit."
+\end{quote}
+\cite{bundesregierung}
+Die Bundesregierung in Deutschland setzt sich aus aus der Bundeskanzlerin und den verschiedenen Bundesministerien zusammen. Aktuell besteht die Regierung aus einer Koalition von CDU/CSU und SPD. Eine kurze Übersicht bietet folgende Tabelle: \\
+\begin{tabular}{lll}
+\hline
+Name & Partei & Rolle \\
+\hline
+Angela Merkel & CDU & Bundeskanzlerin der Bundesrepublik Deutschland \\
+Sigmar Gabriel & SPD & Bundesminister des Auswärtigen \\
+Brigitte Zypries & SPD & Bundesministerin für Wirtschaft und Energie \\
+Thomas de Maizière & CDU & Bundesminister des Innern \\
+Heiko Maas & SPD & Bundesminister der Justiz und für Verbraucherschutz \\
+Wolfgang Schäuble & CDU & Bundesminister der Finanzen \\
+Andrea Nahles & SPD & Bundesministerin für Arbeit und Soziales \\
+Christian Schmidt & CSU & Bundesminister für Ernährung und Landwirtschaft \\
+Ursula von der Leyen & CDU & Bundesministerin der Verteidigung \\
+Katarina Barley  & SPD & Bundesministerin für Familie, Senioren, Frauen und Jugend \\
+Hermann Gröhe & CDU & Bundesminister für Gesundheit \\
+Alexander Dobrindt & CSU & Bundesminister für Verkehr und digitale Infrastruktur \\
+Barbara Hendricks & SPD & Bundesministerin für Umwelt, Naturschutz, Bau und Reaktorsicherheit \\
+Johanna Wanka & CDU & Bundesministerin für Bildung und Forschung \\
+Gerd Müller & CSU & Bundesminister für wirtschaftliche Zusammenarbeit und Entwicklung \\
+Peter Altmaier & CDU & Chef des Bundeskanzleramtes und Bundesminister für besondere Aufgaben \\
+\hline
+\end{tabular} \\
+Im Gegensatz dazu sind im Bundestag alle gewählten Parteien vertreten, die über die "Fünf Prozent Hürde" gekommen sind. Dazu gehören, abgesehen von CDU/CSU und SPD, Die Linke und BÜNDNIS 90/DIE GRÜNEN. Weitere wichtige Parteien im politischen Spektrum sind die FDP und die AfD. Wichtige Personen in diesem Zusammenhang sind die Parteivorsitzenden und deren Stellvertreter: \\
+\begin{tabular}{lll}
+\hline
+Partei & Parteivorsitzender & stellvertretende Vorsitzende \\
+\hline
+CDU & Angela Merkel & Volker Bouffier, Ursula von der Leyen, Julia Klöckner, Armin Laschet, Thomas Strobl \\
+CSU & Horst Seehofer & Manfred Weber, Christian Schmidt, Barbara Stamm, Angelika Niebler, Kurt Gribl \\
+SPD & Martin Schulz & Thorsten Schäfer-Gümbel, Manuela Schwesig, Olaf Scholz, Aydan Özoğuz, Ralf Stegner \\
+Bündnis 90/Die Grünen & Cem Özdemir, Simone Peter & \\
+Die Linke & Katja Kipping, Bernd Riexinger & Caren Lay, Axel Troost, Tobias Pflüger, Janine Wissler \\
+FDP & Christian Lindner & Wolfgang Kubicki, Marie-Agnes Strack-Zimmermann, Katja Suding \\
+AfD & Frauke Petry, Jörg Meuthen & Alexander Gauland, Beatrix von Storch, Albrecht Glaser \\
+\hline
+\end{tabular} \\
+Abgesehen von den oben genannten Politikern gibt es noch weitere Ämter, wie beispielsweise Fraktionsvorsitzende oder Generalsekretäre, welche ebenfalls eine wichtige Informationsquelle darstellen, hier aber nicht explizit aufgeführt werden. Bis auf wenige Ausnahmen sind alle oben genannten Politiker in den sozialen Medien aktiv und es ist somit möglich, poltische Texte abzufragen. Da diese durch die professionellen Büros der Politiker erstellt werden, sind sie in angebrachter Sprache und Grammatik verfasst. Somit sind sie auch für die Analyse mit Hilfe des Modells verwendbar, da sich der Wortschatz ähneln sollte.
