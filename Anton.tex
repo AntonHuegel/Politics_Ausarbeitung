@@ -14,6 +14,7 @@ Der in  \cite{LuB} vorgestellte Ansatz beschränkt die manuelle Arbeit auf eine 
 \item Mittels der Wortfrequenzen und den zugehörigen Word-Scores kann nun auf eine Position in der zu Beginn festgelegten Skala zurückgerechnet werden wodurch man eine Einordnung des Virgin-Texts erhält.  
 \end{itemize}
 
+\subsection{Berechnungen} \label{Berechnungen}
 
 Konkret werden die folgenden Berechnungen durchgeführt: \\
 Seien zu $m\in\N$ die Reference-Texte  $R_1,\ldots,R_M$ und zu $N\in\N$ Virgin-Texte $V_1,\ldots,V_N$ gegeben. 
@@ -44,13 +45,14 @@ Daher muss noch eine Normierung durchgeführt werden. Laver und Benoit schlagen 
 Sei $\bar{S_v}$ der Mittelwert aller Virgin-Scores und $\Std(S_v),~\Std(a)$ die Standardabweichung der Virgin-Scores bzw. der a priorie Einordnung Reference-Texte. Die normierten Größen $S_v*$ erhält man nun durch
 \begin{displaymath}
 S_v* = (S_v - \bar{S_v}) \frac{\Std(S_v)}{\Std(a)} +\bar{S_v}. 
-\end{displaymath} 
- 
- 
-
-  \subsection{Abgrenzung zu anderen Methoden}
-  \subsection{A priori Aproach vs Inductive Analysis}
-  \subsection{Choosing Reference and Virgin Texts}
+\end{displaymath}   
+  
+  
+  \subsection{A priori Ansatz und Induktive Analyse}
+Die Autoren unterscheiden zwischen einem \emph{a priori} und einem \emph{a posteriori} oder \emph{induktivem} Ansatz. Während bei ersterem politische Dimensionen als gegeben vorausgesetzt werden und die Reference-Texte dann auf diesen durch Experten oder Laien mit vorher besehendem Wissen eingeordnet werden, setzt letzter solches Wissen nicht voraus. Im a posteriori Ansatz werden Differenzen der Reference-Texte analysiert, welche dann die Dimensionen bilden, auf denen die Texte entsprechend eingeordnet werden. Zur Analyse der Differenzen wird bestimmten Textpassagen eine Semantik gegeben, welche sich dann in Anzahl und Aussage von anderen unterscheiden kann. Die Autoren kritisieren hierbei, dass in diesem induktiven Ansatzt doch wiederum a priori vorhandenes Wissen verwendet wird und entscheiden sich daher direkt den \emph{a priori Ansatzt} zu verwenden.
+  
+  
+  \subsection{Wahl von Reference- und Virgin-Texten}
   Ein bedeutender Schritt ist die sinnvolle Wahl von Refernce- und Virgin-Texten. Mit Begriffen der Linearen Algebra gesprochen, ist es Aufgabe der Reference-Texte den Raum politischer Positionen aufzuspannen, in welchem die Virgin-Texte dann einen Punkt zugewiesen bekommen. Die Refernce-Texte müssen also eine Vektorraumbasis darstellen, die Virgin-Texte müssen Elemente eben dieses Vekotrraums sein. \\
   Laver und Benoit \cite{LuB} geben einige Hinweise, was bei der Wahl von Reference-Texten zu beachten ist. \\
   Zunächst muss für alle in Betracht gezogenen Reference-Texte eine a priori Einordnung auf der Dimension gegeben sein, die untersucht werden soll. \\
@@ -60,16 +62,41 @@ S_v* = (S_v - \bar{S_v}) \frac{\Std(S_v)}{\Std(a)} +\bar{S_v}.
   Diese Überlegungen veranlassen uns, die Texte des Manifesto-Projects als Reference-Texte zu verwenden: Parteiprogramme aller Parteien haben das formale Vokanbular eines schriftlichen Textes, ohne die Fremdwort-Fülle einer wissenschaftlichen Arbeit aufzuweisen. Parteiprogramme sind recht lang und decken alle gesellschaftlich relevanten Theman ab. Durch die kombination von Parteiprogrammen aller demokratischen Parteien sind auch alle demokratischen Positionen vertreten, der gesamte Raum wird aufgespannt. Zuletzt und an wichtigsten: Durch die vorhandene Einordnung der der Texte auf einer Vielzahl politischer Positionen ist es uns erst möglich diese als Referenz zu werden. 
   
   
-  
-  
-  
-  \subsection{Word Scores and Interpretation}
-  
-\section{Matalab Programm zur Impelementierung des eben dargestellten Vorgangs mit Import der Texte aus SQL-Datenbank}
+\section{Implementierung in Matlab}
+Um die eben erläuterte Vorgehensweise an Anwendungsbeispielen zu untersuchen, ist ein Matlab-Programm geschrieben worden, welches nun vorgestellt werden soll.
+
+\subsection{Funktionen}
+\begin{enumerate}[(a)]
+\item \label{wordFreq} \texttt{[W, F] = wordFreq( T )} \newline
+      INPUT: Cell-Array \texttt{T} mit Texten als Character-Array \newline
+      OUTPUT: Cell-Array \texttt{W} mit allen in \texttt{T} vorkommenden Wörtern. \texttt{F} ist eine Matrix, deren Element $f_{ij}$ die relative Häufigkeit des $i$-ten Wortes aus \texttt{W} im $j$-ten Text aus \texttt{T} enthält. 
+
+\item \label{wordScore} \texttt{S = wordScore(F, PP )} \newline
+      INPUT: Matrix \texttt{F} aus Funktion (\ref{wordFreq}) und Matrix \texttt{PP} mit \texttt{size(PP,1) == size(F,2)}, welche in Zeile $i$ die politische Positionen des in Spalte $i$ von \texttt{F} bedachten Textes enthält, bezüglich der \texttt{size(PP,2) zuvor frei gewählten Dimensionen.}  \newline
+      OUTPUT: Matrix \texttt{S} mit \texttt{size(S,1)==size(F,1)}, \texttt{size(S,2)==size(PP,2)} die in jeder Zeile die Word-Scores den entsprechenden Wortes zu den Dimensionen aus \texttt{PP} enthält.
+ 
+   
+\item \label{virginScore} \texttt{VS = virginScore(VF, RS)} \newline
+      INPUT: Matrizen \texttt{VF} mit den aus Funktion (\ref{wordFreq}) gewonnen relativen Worthäufigkeiten in den Virign-Texten und \texttt{RS} mit den aus Funktion (\ref{wordScore}) gewonnen Word-Scores. \newline
+      OUTPUT: Matrix \texttt{VS} mit den Virign-Scores der Texte aus \texttt{VF} bezüglich der mit \texttt{RS} festgelegten Dimensionen.
+   
+\item \label{transVS} \texttt{PPvir = transVS(PPvir, PPref)} \newline
+      INPUT: Matrizen \texttt{PPvir} und \texttt{PPref} deren Zeilen die politischen Positionen der Virgin- bzw. Reference-Texte enthält (erstere gewonnen durch Funktion (\ref{virginScore}), zweitere a priori gegeben). \newline
+      OUTPUT:Berechnet die in Abschnitt \ref{Berechnungen} erläuterten normierten Virgin-Scores und gibt die damit aktualisierte Matrix \texttt{PPvir} zurück.
+   
+\item \label{getStatements} \texttt{[texts, lastname, parid] = getStatements(id)} \newline
+    Lädt die Facebook-Statements der Politiker, deren ID im Array \texttt{id} enthalten ist, aus der SQL-Datenbank und gibt diese in \texttt{texts} zurück, zusammen mit deren Nachname in \texttt{lastname} und Partei-ID in \texttt{parid}.
+
+\item \label{getcmpref} \texttt{[reftxt, pp, partyid] = getcmpref(dim, filter, years, party)} \newline
+    Lädt als Reference-Texte verwendeten CMP-Texte zusammen mit deren politischer Einordnung und der Partei-ID und gibt diese über die OUTPUT-Variablen \texttt{reftxt}, \texttt{pp} bzw. \texttt{partyid} zurück. Die INPUT-Parameter \texttt{dim} und \texttt{filter} müssen angegeben werden. \texttt{dim} ist hierbei einer der CMP-Dimensionen, mit \texttt{filter =}\linebreak\texttt{'text'|'filter1'|'filter2'} wird die gewünschte Filterstufe festgelegt. Die Parameter \texttt{years} und \texttt{party} sind optional, mittels Ihnen können die Reference-Texte auf einen bestimmten Zeitraum oder bestimmte Parteien eingeschränkt werden. Bsp.: \texttt{years = [1990 2010]} liefert alle Texte aus dem Zeitraum $1990$ bis $2010$; \texttt{party = [1 2]} liefert nur Texte von CDU und SPD.
+
+
+
+   
+\end{enumerate}
+
 
 \section{Anwendung}
     \subsection{Naive Links-Rechts Dimension mit Parteiprogrammen als Text-Basis}
-    \subsection{Weitere Dimensionen Testen auf Basis der CMP Scores}
-    \subsection{Postings aus Sozialen-Netzwerken als Virgin Text zur Einordnung von Einzelpersonen verwenden}
-    \subsection{Jeweils Vergleich der Ergebnisse mit den CMP Daten und Fazit über die Tauglichkeit des Verfahrens}
+    \subsection{Refenrece-Texte und Dimensionen auf Basis der CMP-Daten}
 
