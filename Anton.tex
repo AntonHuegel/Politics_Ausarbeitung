@@ -90,7 +90,20 @@ Um die eben erläuterte Vorgehensweise an Anwendungsbeispielen zu untersuchen, i
 \item \label{getcmpref} \texttt{[reftxt, pp, partyid] = getcmpref(dim, filter, years, party)} \newline
     Lädt als Reference-Texte verwendeten CMP-Texte zusammen mit deren politischer Einordnung und der Partei-ID und gibt diese über die OUTPUT-Variablen \texttt{reftxt}, \texttt{pp} bzw. \texttt{partyid} zurück. Die INPUT-Parameter \texttt{dim} und \texttt{filter} müssen angegeben werden. \texttt{dim} ist hierbei einer der CMP-Dimensionen, mit \texttt{filter =}\linebreak\texttt{'text'|'filter1'|'filter2'} wird die gewünschte Filterstufe festgelegt. Die Parameter \texttt{years} und \texttt{party} sind optional, mittels Ihnen können die Reference-Texte auf einen bestimmten Zeitraum oder bestimmte Parteien eingeschränkt werden. Bsp.: \texttt{years = [1990 2010]} liefert alle Texte aus dem Zeitraum $1990$ bis $2010$; \texttt{party = [1 2]} liefert nur Texte von CDU und SPD.
 
+\subsection{Skripte}
+Die folgenden Skripte wurden vorbereitet. Die berechnen und plotten unter Verwendung der oben aufgelisteten Funktionen die Einordnung verschiedener Texte in zwei Dimensionen, welche aus einer Teilmenge der CMP-Dimensionen gewählt werden können.
 
+\begin{enumerate}
+\item \verb|main_lr| \newline
+Dieses Skript nimmt eine Simple Links-Rechts-Skala an, auf welcher sechs der sieben größten deutschen Parteien ein Wert zwischen $-1$ (links) und $+1$ (rechts) zugeordnet wird. Die Positionierung der siebten Partei wird dann berechnet. Als Textbasis werden die Parteiprogramme zur Bundestagswahl 2017 verwendet.
+
+\item \verb|main_cmp| \newline
+Als Reference-Texte werden die Texte des CMP verwendet, deren Einordnung auf gewissen vorgegebenen Skalen ebenfalls druch CMP gegeben sind. Als Virgin Texte werden die Parteiprogramme zur Bundestagswahl 2017 verwendendet. In einem zweidimensionalen Plot können nun die Platzierungen der früheren Parteiprogramme nach CMP und die berechnete Plazierung des diesjährigen Parteiprogramms betrachetet werden.
+
+\item \verb|main_fb| \newline
+Die Reference-Texte und wählbaren Dimensionen sind die gleichen wie in \verb|main_cmp|. Als Virgin-Text werden jedoch Facebook-Postings verscheidener Politiker verwendet und deren Einordnung betrachtet. 
+
+\end{enumerate}
 
    
 \end{enumerate}
