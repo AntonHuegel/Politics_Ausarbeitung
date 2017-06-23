@@ -110,6 +110,28 @@ Die Reference-Texte und wählbaren Dimensionen sind die gleichen wie in \verb|ma
 
 
 \section{Anwendung}
+Das eben vorgestellte Programm soll nun auf einige aktuelle Beispiele angewandt werden.
     \subsection{Naive Links-Rechts Dimension mit Parteiprogrammen als Text-Basis}
+    Zunächst sollen alle derzeit im Bundestag vertretenen Parteien in einem einfachen links-rechts Spektrum eingeordnet mit ihren Parteiprogrammen als Reference-Texte dienen, um dann mit den Parteiprogrammen der beiden ab September höchstwahrscheinlich hinzustoßenden Parteien als Vrigin-Texte, die Position zu der Neulinge zu berechnen. Die Positionen sollen im Intervall $[-1,1]$ repräsentiert werden, wobei $-1$ links und $+1$ rechts bedeutet. Wir schlagen folgende Zuordnung vor:
+    \begin{lstlisting}[style=Matlab-editor]
+PP = [      0;      % CDU
+           -0.25;   % SPD
+           -0.5;    % GRN
+            0.1;    % CSU
+           -0.75    % LKS
+      ];    
+    \end{lstlisting}
+      
+     Die auf dieser Referenz-Basis einzuordnenden Parteien sind FDP und AfD. 
+     Zunächst werden die relativen Wort-Häufigkeiten in allen Parteiprogrammen berechnet. 
+     Mit den Positionierungen der Referenz-Parteien kann damit ein Word-Score für jedes Wort ermittelt werden.
+     Diese Word-Scores ergeben Abhängigkeit der Wort-Häufigkeiten in den Virgin-Texten die gesuchte Positionierung:
+    \begin{lstlisting}[style=Matlab-editor]
+Score FDP  = -0.58553 
+Score AfD  =  0.042483
+    \end{lstlisting}
+    Die FDP befindet sich nach Aussage dieses Modells auf der Link-Rechts-Skala also etwas links der Grünen, die AfD etwa auf Höhe der Union.
+    
+    
     \subsection{Refenrece-Texte und Dimensionen auf Basis der CMP-Daten}
 
