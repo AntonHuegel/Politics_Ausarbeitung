@@ -62,6 +62,19 @@ Die Autoren unterscheiden zwischen einem \emph{a priori} und einem \emph{a poste
   Diese Überlegungen veranlassen uns, die Texte des Manifesto-Projects als Reference-Texte zu verwenden: Parteiprogramme aller Parteien haben das formale Vokanbular eines schriftlichen Textes, ohne die Fremdwort-Fülle einer wissenschaftlichen Arbeit aufzuweisen. Parteiprogramme sind recht lang und decken alle gesellschaftlich relevanten Theman ab. Durch die kombination von Parteiprogrammen aller demokratischen Parteien sind auch alle demokratischen Positionen vertreten, der gesamte Raum wird aufgespannt. Zuletzt und an wichtigsten: Durch die vorhandene Einordnung der der Texte auf einer Vielzahl politischer Positionen ist es uns erst möglich diese als Referenz zu werden. 
   
   
+\subsection{Ergebnisse von Laver und Benoit}
+Laver und Benoit \cite{LuB} wenden ihre Methode auf die Wirtschaftspolitik britischer und irischer Parteien an. Dabei verwenden Sie Parteiprogramme von 1992 als Reference Texte und Parteiprogramme von 1997 als Virgin-Texte, die sie gleichzeitig von Experten haben beurteilen lassen. In \ref{fig:Tab2, fig:Tab3} sind die Ergebnisse zu sehen. Den fettgedruckten Zahlen ist besondere Aufmerksamkeit zu schenken, sie stellen die durch den Algorithmus gewonnene Einschätzung und den durch Experten gegebenen Score dar. Bei den britischen Parteien ergab sich hier durch den Algorithmus ein Score von $5.0$, $9.71$ bzw. $17.18$ für die Libeare, die Labour bzw. die Konservative Partei; demgegenüber stehen die Einschätzungen der Experten mit $5.77$, $10.3$ bzw. $15.05$ in der gleichen Reihenfolge. Die Übereinstimmung ist augenscheinlich.
+
+\begin{figure}
+   \includegraphics[width=\textwidth]{images/Tab2_LuB.png}
+   \caption{Ergebnisse von Laver und Benoit bei Betrachtung der wirtschaflichen Positionenen britischer Parteien \cite{LuB}.\label{fig:Tab2}}
+\end{figure}
+\begin{figure}
+   \includegraphics[width=\textwidth]{images/Tab3_LuB.png}
+   \caption{Ergebnisse von Laver und Benoit bei Betrachtung der wirtschaflichen Positionenen irischer Parteien \cite{LuB}. \label{fig:Tab3}}
+\end{figure}
+
+  
 \section{Implementierung in Matlab}
 Um die eben erläuterte Vorgehensweise an Anwendungsbeispielen zu untersuchen, ist ein Matlab-Programm geschrieben worden, welches nun vorgestellt werden soll.
 
@@ -134,4 +147,21 @@ Score AfD  =  0.042483
     
     
     \subsection{Refenrece-Texte und Dimensionen auf Basis der CMP-Daten}
+    Nun soll eine Einschätzung der politischer Positionen der Parteien von heute auf Basis von CMP-Reference-Texten erfolgen. Insbesondere soll geschaut werden, an welcher Stelle die Parteien heute im Verhältnis zu ihreren früheren Positionen stehen, in wieweit also ein Wandel der Parteien selbst stattgefunden hat. 
+    In einem zweiten Schritt soll untersucht werden, ob und in wie weit die Aussagen von individuellen Politikern auf Facebook in den Kontext der CMP-Refence-Texte eingeordnet werden können. \\
+    Als CMP-Dimensionen werden stets das Engagement im Umweltschutz \linebreak (\verb|environmental_protection|) sowie die gewünschte Regulation der freien Marktwirktschaft (\verb|market_regulation|) gewählt. Da davon ausgegangen wird, dass diese beiden Variablen in Abhängigkeit stehen, wird eine Anordnung der Positionen entlang einer Ursprungsgeraden erwartet: Erhöter Umweltschutz erfordert verstärkt Eingriffe in dei freie Marktwirtschaft; staatliche Eingriffe in die Marktwirktschaft werden oft mit Umweltschutz begründet. Es wird nicht davon ausgegangen, dass gänzlich unabhängige CMP-Variablen gefunden werden können. Daher entscheiden wir uns für diese Variablen, deren Abhängigkeit bekannt und abschätzbar ist.
+    
+    
+    \paragraph{Parteiprogramme}
+     In diesem Abschnitt werden diesjährigen Parteiprogramme als Virgin-Text gewählt und auf Basis aller in CMP verfügbaren Parteiprogramme seit 1995 beurteilt. Die Texte werden im Originallaut sowie mit beiden Filterstufen verwendet. 
+     Die Ergebnisse sind in Abbildung \ref{manifestocmp} zu sehen. Die Häufung entlang der ersten Winkelhalbierenden ist deutlich zu sehen. Interessant ist, dass die Virgin-Texte einen tendeziell geringeren Score haben, als die Reference-Texte. Mit erhöhter Filterstufe steigert sich dieser Effekt. Das könnte eventuell daran liegen, dass die Parteiprogramme mit der Zeit vager geworden sind.
+     
+     
+    \begin{figure}
+    \centering     %%% not \center
+    \subfigure{\includegraphics[width=0.49\textwidth]{images/environmental_protection_market_regulation_text.png}}
+    \subfigure{\includegraphics[width=0.49\textwidth]{images/environmental_protection_market_regulation_filter1.png}}
+    \subfigure{\includegraphics[width=0.8\textwidth]{images/environmental_protection_market_regulation_filter2.png}}
+    \caption{Position der diesjähringen Parteiprogramme mit angegebener Dimension und Filter. \label{manifestocmp}}
+    \end{figure}
 
