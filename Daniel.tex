@@ -11,26 +11,35 @@ Rein auf den gedruckten Text ausgelegte Medien, wie beispielsweise Zeitungen ode
 \subsection{Audio/Video}
 Medien, welche Nachrichten per Audio oder Video übertragen, sind ebenfalls relativ uninteressant für die automatische Analyse. Hierzu zählen beispielsweise Fernsehsendungen, Radiosender oder auch Podcasts im Internet. Ähnlich wie bei den rein gedruckten Medien besteht auch hier das Problem, die Textinformationen in ein für den Computer „leserliches“ Format zu konvertieren. Insbesondere bei akustischen Signalen, also gesprochenem Text, ist diese Analyse sehr aufwändig und Fehleranfällig. 
 
-\subsection{Internet}	
+\subsection{Internet}
+Das Internet gilt als die Beste Bezugsquelle für maschinell auswertbare Texte. Jedoch sind auch hier Einschränkungen vorhanden, da die Texte ebenfalls für den menschlichen Leser optimiert sind. Im Internet kann man einige Bezugsquellen unterscheiden:
+\begin{itemize}
+\item Webseiten einzelner Anbieter
+\item Soziale Medien
+\item Per API zur Verfügung gestellte Daten
+\end{itemize}
+Es ist eine große Herausforderung, Texte von Webseiten automatisiert analysieren zu lassen. Die Schwierigkeit hierbei ergibt sich aus der Tatsache, dass die HTML-Struktur der einzelnen Seiten gravierende Unterschiede aufweisen kann. Die \textit{Hypertext Markup Language (HTML)} ist speziell dafür designed, statische Inhalte in vielfacher Art und Weise darzustellen. Dies setzt eine hohe Interpretationsfähigkeit des verarbeitenden Programmes voraus.
+\newline
+Soziale Medien wie Facebook oder Twitter hingegen stellen selbst häufig eine sogenannte \textit{Application Programming Interface (API)} zur Verfügung, mit deren Hilfe automatisch Inhalte abgefragt werden können. Die Abfrage hierbei erfolgt direkt mittels \textit{HTTP (Hypertext Transfer Protocol) GET-Abfrage}, welcher auch manuell ausgeführt werden kann und ausreichend Platz für Parameter zur Verfügung stellt. Bei erfolgreicher Anfrage erhält man als Antwort eine Zeichenkette, welche zumeist in \textit{XML (Extensible Markup Language)} oder im moderneren \textit{JSON (JavaScript Object Notation)} vorliegen. Alle bekannteren Programmier- und Skriptsprachen bringen bereits Parser für beide Formate mit, sodass die Daten direkt in das Programm eingelesen werden können.
 
 \section{Datenbanken}
 Im Zuge der Textverarbeitung trifft man immer wieder auf den Begriff der Datenbanken. Diese sind im ein wichtiges Werkzeug, um die Textmanipulation sinnvoll zu unterstützen. Eine Datenbank stellt die nötigen Funktionen zur Verfügung, um große Datenmengen effizient zu speichern, zu analysieren und zu verarbeiten. Im Bereich der relationalen Datenbanken ist die Sprache SQL (Structured Query Language) weitgehend verbreitet. Diese bietet unterschiedliche Möglichkeiten an, die gespeicherten Daten abzufragen und zu manipulieren:
-\begin{enumerate}
+\begin{itemize}
 \item INSERT
 \item UPDATE
 \item SELECT
 \item SORT
 \item JOIN
 \item DELETE
-\end{enumerate}
+\end{itemize}
 Logische Bedingungen können, wie in anderen Sprachen auch, mit in die Abfragen integriert werden. Diese werden durch einige zusätzliche Funktionen unterstützt. Beispielsweise lassen sich die Länge von Texten oder Mittelwerte schnell berechnen und in die logische Bedingung integrieren.
 Wichtig hierbei ist ebenfalls der Begriff der Normalisierung. Um Konsitenz zu wahren und Redundanzen zu vermeiden existieren verschiedene Normalformen:
-\begin{enumerate}
+\begin{itemize}
 \item 1NF - Erste Normalform
 \item 2NF - Zweite Normalform
 \item 3NF - Dritte Normalform
 \item BCNF - Boyce-Codd Normalform
-\end{enumerate}
+\end{itemize}
 Die Formen sind hierbei anhand ihrer Striktheit aufsteigend angeordnet. Als ein Beispiel aus dem Kontext der politischen Textanalyse wird ein kurzes Schema zur Speicherung politischer Texte vorgestellt. Relevante Informationen sind hierbei die Herkunft des Textes (Politiker, Partei) sowie eine eindeutige Zuordnung anhand einer Identifikationsnummer. \\
 \begin{tabular}{llllll}
 \hline
@@ -127,17 +136,70 @@ und Adverbien.
 Ein zweiter Schritt ist das Reduzieren eben jener Wortformen auf ihre grammatikalische Grundform. Die Änderung ab von der Grundform nennt man bei Verben Konjugation
 und bei Nomen Deklination. Die Variation der Wörter hängt hierbei von vielen verschiedenen Faktoren ab, beispielsweise der Zeitform oder der Person.
 
-\subsection{Morphologie Datenbank	}
+\subsection{Morphologie Datenbank}
+Mit der Struktur von Wörtern setzt sich die sogenannte Morphologie auseinander. Wie im vorherigen Kapitel beschrieben können Wörter sowohl dekliniert als auch konjugiert werden. Nach einer solchen Veränderung ist das Wort zwar für den menschlichen Leser immer noch das gleiche, der Computer kann jedoch das konjugierte/deklinierte Wort nicht in einen Kontext mit dem Wortstamm bringen. Betrachtet man als Beispiel die folgenden zwei Sätze, so wird man feststellen, dass diese semantisch nahezu identisch sind:
+\begin{itemize}
+\item Peter ging gestern zur Schule.
+\item Peter ist gestern zur Schule gegangen.
+\end{itemize}
+Für das weitere Textmodell sind jedoch beide Formen von \textit{gehen}, also \textit{ging} und \textit{ist gegangen}, trivial nicht zu unterscheiden.
+\newline
+Abhilfe für dieses Dilemma bietet die Morphologie Datenbank \textit{Morphy}, die im Internet verfügbar ist. Diese enthält circa eine Millionen deutsche Wörter mit ihren zugehörigen Stammformen. Damit bietet sie die Möglichkeit, alle im Text vorkommenden Wörter auf ihre Grundform zu reduzieren und so semantisch äquivalente Wörter in einen Konext zu bringen. 
+
 \subsection{Synonym Datenbank}
+Eine ähnliche Möglichkeit zur Bereinigung des Textes von semantisch identischen oder ähnlichen Wörtern bietet die Synonym-Datenbank \textit{OpenThesaurus}. Betrachtet man abermals das Beispiel von oben, so wird der Vorteil einer Synonym-Bereinigung schnell klar:
+\begin{itemize}
+\item Peter ist gestern zur Schule gegangen.
+\item Peter ist gestern zur Schule gelaufen.
+\end{itemize}
+Entnimmt man dem Text als zentrale Information, dass Peter gestern in der Schule anwesend war, so ist die Information wie er dorthin gelangt ist unwichtig und kann ignoriert werden.
+\newline
+Hierfür stellt \textit{OpenThesaurus} eine umfassende Datenbank zur Verfügung, die Informationen über Worte, ihre Synonyme und noch weitere Eigenschaften enthält. Der Funktionsumfang enthält dabei den Export der kompletten Datenbank oder die Benutzung der internen API unter \textit{GNU Lesser General Public License (LGPL}.
+
+\subsection{Rechtschreibprüfung und Metriken}
+Da politische Texte vorwiegend von tatsächlichen Personen verfasst und nicht automatisiert erstellt werden, können sich in diese Texte natürlich Rechtschreibfehler einschleichen. Im Rahmen politischer Texte ist dies zwar unwahrscheinlich, da die Texte mehrfach von Experten Korrektur gelesen werden, jedoch nicht unmöglich. Werden hingegen Texte aus sozialen Medien oder ähnlichen Quellen analysiert, so steigt die Wahrscheinlichkeit, dass Wörter fehlerhaft geschrieben werden. Dabei können drei Fehler unterschieden werden:
+\begin{itemize}
+\item Hinzufügen eines Extrabuchstabens: Google - Gooogle
+\item Entfernen eines relevanten Buchstabens: Google - Gogle
+\item Austauschen eines Buchstabens: Google - Go0gle
+\end{itemize}
+Um beim Auftreten solcher Fehler dennoch ein korrektes Wort erkennen zu können werden sogenannte Metriken eingeführt. Diese beschreiben, ähnlich wie in der Mathematik, den Abstand zweier Zeichenketten. Dabei gilt:
+\begin{itemize}
+\item \( ||s1 - s2|| = 0 \) - der Abstand eines Wortes zu sich selbst ist Null
+\item \( ||s1 - s2|| > 0, s1 \neq s2 \) - der Abstand zweier unterschiedlicher Worte ist größer Null
+\item \( ||s1 - s2|| = ||s2 - s1|| \) - Kommutativität, die Wörter dürfen vertauscht werden
+\item \( ||s1 - s3|| \leq ||s1 - s2|| + ||s2 - s3|| \) - Dreiecksungleichung, der kürzeste Abstand ist der direkte Weg
+\end{itemize}
+Die einfachste Metrik, welche die Bedingungen erfüllt, ist die \textit{Hamming Edit Distance}. Diese berechnet sich aus der Anzahl an Zeichen, die sich bei zwei Zeichenketten unterscheiden. Beide Zeichenketten haben normalerweise die gleiche Länge. Sollte sich diese jedoch unterscheiden, so wird der kürzere String mit Nullen am Ende erweitert.
+\newline
+Eine weitere Metrik ist die sogenannte \textit{Longest Common Subsequence (LCS)}. Diese gilt nur für Zeichenketten, in denen Zeichen hinzugefügt oder entfernt wurden. Wie der Name schon vermuten lässt, beschreibt die LCS die längste Folge von Zeichen, die in beiden Zeichenketten vorkommt.
+\newline
+Die \textit{Levenshtein Edit Distance} lässt sich aus der minimalen Anzahl an Operationen errechnen, die benötigt werden, um eine Zeichenkette in eine andere zu konvertieren. Gültige Operationen sind hierbei das Einfügen, Entfernen und Vertauschen von Zeichen.
+\newline
+\begin{tabular}{|l|ccc|}
+\hline
+Zeichenkette & Hamming & LCS & Levenshtein \\
+\hline
+Gooogle & 4 & 1 & 1 \\
+Gogle & 4 & 1 & 1 \\
+Go0gle & 1 & 1 & 1 \\
+\hline
+\end{tabular}
+\newline
+Wie man an den Beispielen sieht eignet sich der Hamming-Abstand nur bedingt für die Rechtschreibprüfung. Sein Vorteil ist jedoch die geringe Berechnungszeit gegenüber den beiden anderen Metriken. Insbesondere der Levenshtein-Abstand ist sehr berechnungsintensiv.
+\newline
+Die Anwendung im Programm könnte folgendermaßen aussehen: Sollte bei einem Wort aus gegebenem Grund angenommen werden, dass dieses falsch geschrieben wurde, so würde der Abstand zu allen weiteren verfügbaren Wörtern berechnet. Sollte dabei ein eindeutiges Minimum gefunden werden, so kann das Wort direkt verbessert werden. Bei multiplen Kandidaten kann eventuell mittels Heuristiken eine Verbesserung durchgeführt werden. Da alle möglichen Abstände berechnet werden müssen ist auch dieses Vorgehen sehr rechenintensiv.
+
+
 \section{Comparative Manifesto Project}
 Das Comparative Manifesto Project, kurz CMP, beschäftigt sich mit der Analyse politischer Texte und Standpunkte einer Vielzahl von Ländern und Parteien weltweit. Als Resultat stehen dem Nutzer der CMP Datenbank ausgiebige Informationen über die jeweiligen Texte zur Verfügung - und zwar in maschinell verwertbarer Form.
 Das Auswerten der Texte erfolgt jedoch nicht durch ein Programm, sondern manuell durch eine effiziente Aufteilung auf verschiedene Arbeiter. Dieses Vorgehen wird Crowd-Sourcing genannt. Dabei werden die Texte in kompakte Pakete aufgeteilt und weltweit an verschiedene Arbeiter verteilt. Dieses Vorgehen hat einige Vorteile:
-\begin{enumerate}
+\begin{itemize}
 \item Der Arbeiter hat nicht den ganzen Text zur Verfügung und muss daher den Teiltext objektiv und ohne Zusammenhang einordnen. Im Kontext des gesamten Textes könnten sonst subjektive Eindrücke das Ergebnis verfälsche.
 \item Identische Teiltexte können an unterschiedliche Arbeiter verteilt werden. So lassen sich subjektive Einstellungen der Arbeiter herausfiltern. Für eine steigende Zahl an Arbeitern kann so ein möglichst objektives Ergebnis erzielt werden.
-\end{enumerate}
+\end{itemize}
 Als Ergebnis der Teilarbeit erhält man nun die Einordnung des Textes in ein Schema aus 56 Kategorien und Subkategorien. Diese Kategorien sollen das ganze politische Spektrum sinnvoll abbilden können. Die Hauptkategorien hierbei sind:
-\begin{enumerate}
+\begin{itemize}
 \item External Relations
 \item Freedom and Democracy
 \item Political System
@@ -145,7 +207,7 @@ Als Ergebnis der Teilarbeit erhält man nun die Einordnung des Textes in ein Sch
 \item Welfare and Quality of Life
 \item Fabric of Society
 \item Social Groups
-\end{enumerate}
+\end{itemize}
 Diese lassen sich wiederum in Subkategorien einteilen um das Ergebnis detaillierter darstellen zu können. Da jede Aussage eines Textes solch einer Kategorie zugeordnet wird, erhält man so eine 56-dimensionale Darstellung des Textes, wobei jede Dimension eine politische Richtung darstellt.
 Das Manifesto Project enthält seit 1945 ungefähr 4000 Texte von über 1000 Parteien aus mehr als 50 verschiedenen Ländern.
 Die Daten können manuell über eine minimalistische Oberfläche abgefragt werden. Alternativ steht, nach einer initialen Registrierung, auch eine API zur automatischen Abfrage zur Verfügung.
@@ -173,10 +235,13 @@ Ursula von der Leyen & CDU & Bundesministerin der Verteidigung \\
 Katarina Barley  & SPD & Bundesministerin für Familie, Senioren, Frauen und Jugend \\
 Hermann Gröhe & CDU & Bundesminister für Gesundheit \\
 Alexander Dobrindt & CSU & Bundesminister für Verkehr und digitale Infrastruktur \\
-Barbara Hendricks & SPD & Bundesministerin für Umwelt, Naturschutz, Bau und Reaktorsicherheit \\
+Barbara Hendricks & SPD & Bundesministerin für Umwelt, Naturschutz, Bau und  \\
+& & Reaktorsicherheit \\
 Johanna Wanka & CDU & Bundesministerin für Bildung und Forschung \\
-Gerd Müller & CSU & Bundesminister für wirtschaftliche Zusammenarbeit und Entwicklung \\
-Peter Altmaier & CDU & Chef des Bundeskanzleramtes und Bundesminister für besondere Aufgaben \\
+Gerd Müller & CSU & Bundesminister für wirtschaftliche Zusammenarbeit und \\
+& & Entwicklung \\
+Peter Altmaier & CDU & Chef des Bundeskanzleramtes und Bundesminister für  \\
+& & besondere Aufgaben \\
 \hline
 \end{tabular} \\
 Im Gegensatz dazu sind im Bundestag alle gewählten Parteien vertreten, die über die "Fünf Prozent Hürde" gekommen sind. Dazu gehören, abgesehen von CDU/CSU und SPD, Die Linke und BÜNDNIS 90/DIE GRÜNEN. Weitere wichtige Parteien im politischen Spektrum sind die FDP und die AfD. Wichtige Personen in diesem Zusammenhang sind die Parteivorsitzenden und deren Stellvertreter: \\
@@ -184,13 +249,39 @@ Im Gegensatz dazu sind im Bundestag alle gewählten Parteien vertreten, die übe
 \hline
 Partei & Parteivorsitzender & stellvertretende Vorsitzende \\
 \hline
-CDU & Angela Merkel & Volker Bouffier, Ursula von der Leyen, Julia Klöckner, Armin Laschet, Thomas Strobl \\
-CSU & Horst Seehofer & Manfred Weber, Christian Schmidt, Barbara Stamm, Angelika Niebler, Kurt Gribl \\
-SPD & Martin Schulz & Thorsten Schäfer-Gümbel, Manuela Schwesig, Olaf Scholz, Aydan Özoğuz, Ralf Stegner \\
-Bündnis 90/Die Grünen & Cem Özdemir, Simone Peter & \\
-Die Linke & Katja Kipping, Bernd Riexinger & Caren Lay, Axel Troost, Tobias Pflüger, Janine Wissler \\
-FDP & Christian Lindner & Wolfgang Kubicki, Marie-Agnes Strack-Zimmermann, Katja Suding \\
-AfD & Frauke Petry, Jörg Meuthen & Alexander Gauland, Beatrix von Storch, Albrecht Glaser \\
+& & Volker Bouffier \\
+& & Ursula von der Leyen \\
+CDU & Angela Merkel & Julia Klöckner \\
+& & Armin Laschet\\
+& & Thomas Strobl \\
+\hline
+& & Manfred Weber \\
+& & Christian Schmidt \\
+CSU & Horst Seehofer &  Barbara Stamm \\
+& & Angelika Niebler\\
+& & Kurt Gribl \\
+\hline
+& & Thorsten Schäfer-Gümbel \\
+& & Manuela Schwesig \\
+SPD & Martin Schulz & Olaf Scholz\\
+& & Aydan Özoğuz\\
+& & Ralf Stegner \\
+\hline
+Bündnis 90/Die Grünen & Cem Özdemir \\
+& Simone Peter & \\
+\hline
+& & Caren Lay \\
+Die Linke & Katja Kipping & Axel Troost\\
+& Bernd Riexinger & Tobias Pflüger \\
+& & Janine Wissler \\
+\hline
+& & Wolfgang Kubicki \\
+FDP & Christian Lindner & Marie-Agnes Strack-Zimmermann\\
+& & Katja Suding \\
+\hline
+& Frauke Petry & Alexander Gauland \\
+AfD & Jörg Meuthen & Beatrix von Storch \\
+& & Albrecht Glaser \\
 \hline
 \end{tabular} \\
 Abgesehen von den oben genannten Politikern gibt es noch weitere Ämter, wie beispielsweise Fraktionsvorsitzende oder Generalsekretäre, welche ebenfalls eine wichtige Informationsquelle darstellen, hier aber nicht explizit aufgeführt werden. Bis auf wenige Ausnahmen sind alle oben genannten Politiker in den sozialen Medien aktiv und es ist somit möglich, poltische Texte abzufragen. Da diese durch die professionellen Büros der Politiker erstellt werden, sind sie in angebrachter Sprache und Grammatik verfasst. Somit sind sie auch für die Analyse mit Hilfe des Modells verwendbar, da sich der Wortschatz ähneln sollte.
