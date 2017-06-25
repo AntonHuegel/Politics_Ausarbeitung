@@ -62,8 +62,8 @@ Die Autoren unterscheiden zwischen einem \emph{a priori} und einem \emph{a poste
   Diese Überlegungen veranlassen uns, die Texte des Manifesto-Projects als Reference-Texte zu verwenden: Parteiprogramme aller Parteien haben das formale Vokanbular eines schriftlichen Textes, ohne die Fremdwort-Fülle einer wissenschaftlichen Arbeit aufzuweisen. Parteiprogramme sind recht lang und decken alle gesellschaftlich relevanten Theman ab. Durch die kombination von Parteiprogrammen aller demokratischen Parteien sind auch alle demokratischen Positionen vertreten, der gesamte Raum wird aufgespannt. Zuletzt und an wichtigsten: Durch die vorhandene Einordnung der der Texte auf einer Vielzahl politischer Positionen ist es uns erst möglich diese als Referenz zu werden. 
   
   
-\subsection{Ergebnisse von Laver und Benoit}
-Laver und Benoit \cite{LuB} wenden ihre Methode auf die Wirtschaftspolitik britischer und irischer Parteien an. Dabei verwenden Sie Parteiprogramme von 1992 als Reference Texte und Parteiprogramme von 1997 als Virgin-Texte, die sie gleichzeitig von Experten haben beurteilen lassen. In \ref{fig:Tab2, fig:Tab3} sind die Ergebnisse zu sehen. Den fettgedruckten Zahlen ist besondere Aufmerksamkeit zu schenken, sie stellen die durch den Algorithmus gewonnene Einschätzung und den durch Experten gegebenen Score dar. Bei den britischen Parteien ergab sich hier durch den Algorithmus ein Score von $5.0$, $9.71$ bzw. $17.18$ für die Libeare, die Labour bzw. die Konservative Partei; demgegenüber stehen die Einschätzungen der Experten mit $5.77$, $10.3$ bzw. $15.05$ in der gleichen Reihenfolge. Die Übereinstimmung ist augenscheinlich.
+\subsection{Ergebnisse von Laver und Benoit} \label{LuBErgebnisse}
+Laver und Benoit \cite{LuB} wenden ihre Methode auf die Wirtschaftspolitik britischer und irischer Parteien an. Dabei verwenden Sie Parteiprogramme von 1992 als Reference Texte und Parteiprogramme von 1997 als Virgin-Texte, die sie gleichzeitig von Experten haben beurteilen lassen. In den Abbildungen \ref{fig:Tab2} und \ref{fig:Tab3} sind die Ergebnisse zu sehen. Den fettgedruckten Zahlen ist besondere Aufmerksamkeit zu schenken, sie stellen die durch den Algorithmus gewonnene Einschätzung und den durch Experten gegebenen Score dar. Bei den britischen Parteien ergab sich hier durch den Algorithmus ein Score von $5.0$, $9.71$ bzw. $17.18$ für die Libeare, die Labour bzw. die Konservative Partei; demgegenüber stehen die Einschätzungen der Experten mit $5.77$, $10.3$ bzw. $15.05$ in der gleichen Reihenfolge. Die Übereinstimmung ist augenscheinlich.
 
 \begin{figure}
    \includegraphics[width=\textwidth]{images/Tab2_LuB.png}
@@ -146,13 +146,26 @@ Score AfD  =  0.042483
     Die FDP befindet sich nach Aussage dieses Modells auf der Link-Rechts-Skala also etwas links der Grünen, die AfD etwa auf Höhe der Union.
     
     
-    \subsection{Refenrece-Texte und Dimensionen auf Basis der CMP-Daten}
-    Nun soll eine Einschätzung der politischer Positionen der Parteien von heute auf Basis von CMP-Reference-Texten erfolgen. Insbesondere soll geschaut werden, an welcher Stelle die Parteien heute im Verhältnis zu ihreren früheren Positionen stehen, in wieweit also ein Wandel der Parteien selbst stattgefunden hat. 
-    In einem zweiten Schritt soll untersucht werden, ob und in wie weit die Aussagen von individuellen Politikern auf Facebook in den Kontext der CMP-Refence-Texte eingeordnet werden können. \\
+    \subsection{Parteiprogramme auf Basis der CMP-Daten}
+    Nun soll eine Einschätzung der politischer Positionen der Parteien von heute auf Basis von CMP-Reference-Texten erfolgen. 
+    Zunächst soll eine Szenario ähnlich dem von Laver und Benoit verwendeten untersucht werden. 
+    Dann wird geschaut, an welcher Stelle die Parteien heute im Verhältnis zu ihreren früheren Positionen stehen, in wieweit also ein Wandel der Parteien selbst stattgefunden hat. 
     Als CMP-Dimensionen werden stets das Engagement im Umweltschutz \linebreak (\verb|environmental_protection|) sowie die gewünschte Regulation der freien Marktwirktschaft (\verb|market_regulation|) gewählt. Da davon ausgegangen wird, dass diese beiden Variablen in Abhängigkeit stehen, wird eine Anordnung der Positionen entlang einer Ursprungsgeraden erwartet: Erhöter Umweltschutz erfordert verstärkt Eingriffe in dei freie Marktwirtschaft; staatliche Eingriffe in die Marktwirktschaft werden oft mit Umweltschutz begründet. Es wird nicht davon ausgegangen, dass gänzlich unabhängige CMP-Variablen gefunden werden können. Daher entscheiden wir uns für diese Variablen, deren Abhängigkeit bekannt und abschätzbar ist.
     
+    \paragraph{Einschritt-Vorhersage}
+    In dieser Untersuchung werden analog zur Vorgehensweise von Laver und Benoit \cite{LuB}, die Parteiprogramme einer Bundestagswahl als Refernce-Text genutzt, um die Parteiprogramme der darauffolgenden Wahl einzuordenen und mit den CMP-Positionierungen zu vergleichen. 
+    Wir wählen das Jahr 2009 als Referenz-Jahr und 2013 als zu untersuchendes Jahr. Die Dimensionen werden gewählt wie Eingangs erläutert. Die untersuchten Parteien sind CDU, SPD, FPD und Linke. Das Ergebnis ist in Abbildung \ref{fig:one20092013} zu sehen.
     
-    \paragraph{Parteiprogramme}
+    \begin{figure}
+    
+        \includegraphics[width = 0.8\textwidth]{images/one_environmental_protection_market_regulation_filter2.png}
+        \caption{Einschritt-Vorhersage: Einordnung der Bundestagswahlprogramme von 2013 auf Basis der 2009 und Vergleich mit den CMP-Positionen. 
+                 \label{fig:one20092013}}
+    \end{figure}
+    
+Deutlich wird, dass die Ergebisse von Laver und Benoit in dieser Anordnung nicht reproduziert werden können. Ein Zusammenhang der automatischen Einordnung mit der des CMP-Projekts ist nicht zu erkennen.      
+    
+    \paragraph{Zeitverlauf}
      In diesem Abschnitt werden diesjährigen Parteiprogramme als Virgin-Text gewählt und auf Basis aller in CMP verfügbaren Parteiprogramme seit 1995 beurteilt. Die Texte werden im Originallaut sowie mit beiden Filterstufen verwendet. 
      Die Ergebnisse sind in Abbildung \ref{manifestocmp} zu sehen. Die Häufung entlang der ersten Winkelhalbierenden ist deutlich zu sehen. Interessant ist, dass die Virgin-Texte einen tendeziell geringeren Score haben, als die Reference-Texte. Mit erhöhter Filterstufe steigert sich dieser Effekt. Das könnte eventuell daran liegen, dass die Parteiprogramme mit der Zeit vager geworden sind.
      
@@ -164,4 +177,20 @@ Score AfD  =  0.042483
     \subfigure{\includegraphics[width=0.8\textwidth]{images/environmental_protection_market_regulation_filter2.png}}
     \caption{Position der diesjähringen Parteiprogramme mit angegebener Dimension und Filter. \label{manifestocmp}}
     \end{figure}
-
+    
+    \subsection{Facebookbeiträge auf Basis der CMP-Daten}
+    In diesem Abschnitt soll untersucht werden, ob und in wie weit die Aussagen von individuellen Politikern auf Facebook in den Kontext der CMP-Refence-Texte eingeordnet werden können.
+     Statt die diesjährigen Partei-Programme als Virgin-Texte zu verweden, werden Beiträge auf den Facebook-Seiten verschiedener Politiker herangezogen. Politische Dimensionen und Reference-Text werden wie im letzten Abschnitt im Paragraph \emph{Zeitverlauf} gewählt: Reference-Texte von 1995 bis 2015, die Facebookbeiträge stammen von 2016 und 2017, als Dimensionen wird weiterhin Markregulierung und Umweltschutz gewählt. Da sich die zweite Filterstufe in sofern bewährt hatte, als dass sie den Zusammenhang der beiden Dimensionen an besten wieder gibt, wird der besseren Übersichtlichkeit wegen nur dieser Filter verwendet und auf die anderen Filterstufen verzichtet. Die Ergebnisse sind in Abbildung \ref{fig:fbFilter2} zu finden.
+     
+     
+    \begin{figure}
+    
+        \includegraphics[width = 0.8\textwidth]{images/fb_environmental_protection_market_regulation_filter2.png}
+        \caption{Einordnung der Facebook-Beiträge verschiedener Parteipolitiker auf Basis der Bundestagswahlprogramme von 1995 bis 2015. Referenz-Positionen sind durch Kreise markiert, Positionen der Facebookbeiträge werden durch Asterikse dargestellt.
+                 \label{fig:fbFilter2}}
+    \end{figure}
+     
+     Während die Abhängigkeit der beiden Dimensionen \verb|market_regulation| und \linebreak\verb|environmental_protection| noch stärker zu Tage tritt, ist eine Zuordnung der Parteipolitiker zu ihren jeweiligen Parteien nicht möglich. Die Verteilung entlang der ersten Winkelhalbierenden mutet an rein zufällig zu sein. Einzig zu beobachten ist, dass die Einordnungen der Facebook-Beiträge insgesamt weniger auf beiden Dimensionen laden, also tendenziell näher am Ursprung liegen. Das kann entweder darauf zurückz zuführen sein, dass auf Facebook weniger deutliche Statements gemacht, bestimmte Buzz-Words, welche auf eindeutige Positionen hindeuten, vermieden und stattdessen lieber allgemeine unverfängliche und positiv klingenden Vormulierungen verwendet werden (\emph{Good Vibes Only}). Es ist aber auch möglich, dass die in Abschnitt \ref{Berechnungen} eingeführte Normierung der Virgin-Scores unzureichend oder für diesen Fall schlicht ungeeignet ist. \\
+     Zu beachten ist auch, dass die als Reference-Texte gewählten Parteiprogramme eigentlich nicht geeignet sind um Facebookbeiträge zu untersuchen. Laver und Benoit weißen darauf hin, dass das in Reference- und Virgin-Texten verwendete Vokabular dasselbe sein sollte. Dass diese Bedingung hier erfüllt wird, ist nicht zu erwarten, da in Sozialen-Netzwerken bekanntermaßen eine andere Sprache gesprochen wird, als in offiziellen Partei-Publikationen.
+     
+    

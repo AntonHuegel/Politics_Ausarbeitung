@@ -1,3 +1,16 @@
 % Ergebnisse
 
 \section{Fazit}
+
+In dieser Arbeit wurde die automatisierte Analyse politischer Texte untersucht und insbesondere die semantikfreie Textanalyse von Laver und Benoit \cite{LuB} betrachtet. \\
+Hierzu wurden zunächst Überlegungen angestellt, wie politische Äußerungen aquiriert und für die computergesestützte Weiterverarbeitung aufbereitet werden können. Als Speicherformat wurde eine SQL-Datenbank gewählt, welche einen schnellen und flexiblen Zugriff ermöglicht.
+Eine Textvorverarbeitung dient dazu, die relevanten Passagen eines Textdokuments zu extrahieren und nicht benötigte Teile, wie Fuß- und Kopfzeilen, wegzulassen. Zudem ermöglicht die automatische Informationsbeschaffung die Zuordnung der Texte zu Politikern und Parteien. Die Anwendung mehrstufiger Filtertechniken ermöglicht, Synonyme zu erfassen, nicht benötigte Hilfs- und Füllworte zu löschen, sowie Konjunktionen auf deren Wortstämme zurückzuführen. \\
+Das Comparative Manifesto Project lieferte durch Expert- Crowd-Survey bereits eingeordnete Texte, welche später als Basis für weitere Analysen genutzt werden konnten. Hierfür wurde ein API-Zugriff auf die CMP-Datenbank ermöglicht. \\
+Nun wurde im speziellen die Methodik von Laver und Benoit herangezogen. Nach einer einführenden Erläuterung der Vorgehensweise wurde die im Zuge dieser Arbeit erstellte Implementierung der Algorithmen vorgestellt. Dieses in Matlab umgesetzte Programm wurde anschließend verwendet, um Texte bundesdeutscher Parteien und Politiker zu untersuchen.\\
+Laver und Benoit haben ihrerseits die Methode an britischen und irischen Parteien getestet und waren wie in Abschnitt \ref{LuBErgebnisse} dokumentiert zu Ergebnissen gekommen, deren Verlgeich mit den Experten-Einschätzungen als \enquote{very gratifying} \cite{LuB} eingeschätzt wurde. Dieses Ergebnis konnten wir an deutschen Parteien nicht reproduzieren. Die Positionierungen der Parteiprogramme von 2013 auf Basis derer von 2009 zeigte keinerlei Übereinstimmung mit denen des CMP. Auch andere Betrachtungen überzeugten nicht von der Anwendbarkeit der Methodik auf die von uns verwendeten Texte. Eine Langzeitbetrachtung aller Parteiprogramme seit 1948 verteilte die Positionen wahllos über das gesamte Spektrum. Bei der Einordnung von Facebookbeiträgen kam keine inhaltiche Nähe eines Politiker zu seiner Partei zustande. Lediglich die Abhängigkeit der gewählten Dimensionen Umweltschutz und Markt-Regulation wurde deutlich. Außerdem zeigte sich, dass Facebookbeiträge augenscheinlich weniger extrem formuliert werden, was aber auch schlichtweg an einer ungeeigneten Normierung der Ergebnisse liegen kann. \\
+Abschließend kann gesagt werden, dass sich die von Laver und Benoit vorgestellte Methodeik nicht eignet um Parteien und Politiker in Deutschland einzuschätzen. Ursächlich für dieses negative Resultat im Gegensatz zu dem der Autoren Laver und Benoit könnte die Sprache sein, andere politische Konventionen z.B. eine deutlichere Sprache in den Parteiprogrammen im Gegensatz zu den sehr vage gehaltenen Programmen in Deutschland, oder die CMP-Datenbank ist als Basis hierfür nicht geeignet.
+Weitere Untersuchungen könnten sich hiermit beschäftigen.
+
+
+
+
