@@ -2,6 +2,13 @@
 
 \definecolor{rahmen}{rgb}{1,.7,.7}
 
+\section{Big Data und Social Bots}
+Mit der rasch fortschreitenden Verbreitung des Internets im Alltag der Gesellschaft stellen wir heute fest, dass Soziale Medien eine wichtige Informationsquelle für Teile der Bevölkerung darstellen. Die Daten der einzelnen Informationsdienstleister sind dort gebündelt und können von den publizierenden Personen ohne Umwege an den Leser bereitgestellt werden. Im politischen Kontext sind weite Teile von Politikern, Parteien und Einrichtungen in den sozialen Medien präsent. Diese können dem Wähler dort zusätzlich simplifizierte Inhalte bereitstellen, die ohne Umwege und unkommentiert zur Verfügung stehen. In den USA stellt das soziale Netzwerk Twitter sogar eine Hauptinformationsquelle des Präsidenten dar.
+\newline
+Doch die direkte Kommunikation mit dem Nutzer stellt diesen auch vor ganz neue Herausforderungen. Seit einiger Zeit tauchen im Internet häufig sogenannte Fake News auf. Darunter versteht man Nachrichten, die nach außen hin erstmal seriös wirken, sich bei genauerer Recherche jedoch als falsch erweisen. Da der durchschnittliche Nutzer selten die Quellen von Berichten überprüft, stellt dies ein zunehmendes Problem dar. Eng damit verknüpft ist der Einsatz von Social Bots. Unter einem Social Bot versteht man ein Programm, welches automatisiert Tätigkeiten in sozialen Netzwerken ausführt, beispielsweise das Upvoten oder Erstellen von Beiträgen. Durch die Ranking-Algorithmen, die die Prioritäten von Beiträgen bewerten, kann so die Anzeige von Beiträgen manipuliert werden. Das Erkennen von Bots funktioniert teilweise sehr einfach, da nur vorgefertigte Texte verwendet werden. Einige Programme sind jedoch komplexer geschrieben und von realen Nutzern nur schwer unterscheidbar.
+\newline
+Mit der Initiative der Bundesregierung gegen Hasskommentare im Netz stehen die Betreiber der Netzwerke nun vor einer großen Herausforderung: Millionen Beiträge müssen auf illegale oder unpassende Inhalte überprüft werden. Die große Anzahl an Postings verhindert dabei nahezu den Einsatz menschlicher Moderatoren, es braucht eine automatische Überprüfung. Ein Ansatz zur automatischen Analyse von Texten liefert dieses Paper. Anhang des vorgestellten Modells soll es möglich sein, Texte zu Verstehen und diese in gewisse Dimensionen einzuordnen. Anhand dieser Einordnung kann so die inhaltliche Position des Textes bzw. des Autors ermittelt werden. Im den nachfolgenden Kapiteln werden die einzelnen Schritte zur Analyse und Einordnung des Textes geschildert und anschließend anhand von einigen politischen Texten vorgenommen.
+
 \section{Akquirierung von Texten}
 Um politische Texte analysieren zu können müssen zuallererst passende Texte beschafft werden. Quellen für solche Texte sind verschiedene vorhanden, welche mehr oder weniger gut geeignet sind, um automatisch analysiert zu werden. Im Folgenden werden drei Kategorien kurz vorgestellt.
 
@@ -23,6 +30,7 @@ Es ist eine große Herausforderung, Texte von Webseiten automatisiert analysiere
 Soziale Medien wie Facebook oder Twitter hingegen stellen selbst häufig eine sogenannte \textit{Application Programming Interface (API)} zur Verfügung, mit deren Hilfe automatisch Inhalte abgefragt werden können. Die Abfrage hierbei erfolgt direkt mittels \textit{HTTP (Hypertext Transfer Protocol) GET-Abfrage}, welcher auch manuell ausgeführt werden kann und ausreichend Platz für Parameter zur Verfügung stellt. Bei erfolgreicher Anfrage erhält man als Antwort eine Zeichenkette, welche zumeist in \textit{XML (Extensible Markup Language)} oder im moderneren \textit{JSON (JavaScript Object Notation)} vorliegen. Alle bekannteren Programmier- und Skriptsprachen bringen bereits Parser für beide Formate mit, sodass die Daten direkt in das Programm eingelesen werden können.
 
 \section{Datenbanken}
+Das nachfolgente Teilkapitel orientiert sich inhaltlich an \cite{datenbanken}.
 Im Zuge der Textverarbeitung trifft man immer wieder auf den Begriff der Datenbanken. Diese sind im ein wichtiges Werkzeug, um die Textmanipulation sinnvoll zu unterstützen. Eine Datenbank stellt die nötigen Funktionen zur Verfügung, um große Datenmengen effizient zu speichern, zu analysieren und zu verarbeiten. Im Bereich der relationalen Datenbanken ist die Sprache SQL (Structured Query Language) weitgehend verbreitet. Diese bietet unterschiedliche Möglichkeiten an, die gespeicherten Daten abzufragen und zu manipulieren:
 \begin{itemize}
 \item INSERT
@@ -92,7 +100,7 @@ ID & Politiker-ID & Text \\
 Die Identifikationsnummer aller drei Tabellen kommt hierbei auch als Schlüssel ins Spiel. Über den Schlüssel bzw. Index können Einträge in einer Tabelle eindeutig identifiziert werden, was sehr effiziente Abfragen ermöglicht. Andererseits werden eben jene IDs in anderen Tabellen als sogenannte Fremdschlüssel verwendet: Sie zeigen auf Schlüssel anderer Tabellen, um Redundanzen zu vermeiden. In obigem Beispiel sind die \textit{Partei-ID} und die \textit{Politiker-ID} Fremdschlüssel. Im Hinblick auf Fremdschlüssel ist besonders auf die Konsistenz der Datensätze zu achten. Wäre beispielsweise der Politiker \textit{Sigmar Gabriel} nicht vorhanden, also die \textit{Politiker-ID} 2 nicht vergeben, so würden die anderen Tabellen auf ungültige Datensätze verweisen.
 
 \section{Textvorverarbeitung}
-
+Das Kapitel der Textverarbeitung setzt sich aus den den folgenden Quellen zusammen: \cite{deutschinfo}, \cite{openthesaurus}, \cite{morphy}, \cite{wikipedia}, \cite{webmining} und \cite{zeichenkodierung}.
 Da die Texte, so wie sie im Internet zur Verfügung gestellt werden, für das Lesen durch den Menschen optimiert sind, müssen noch einige zusätzliche Schritte ausgeführt werden, damit die Daten auch effektiv durch den Computer ausgewertet werden können. Anhand von dem folgenden Beispieltext wird die Notwendigkeit für eine solche Vorverarbeitung deutlich. Die Schritt, die hierbei zur Aufbereitung des Textes durchgeführt werden, werden später in der Ausarbeitung detailliert beschrieben. Der Text ist ein Beitrag von Christian Lindner über Facebook.
 \newline
 \begin{quote}
@@ -235,6 +243,7 @@ Die Anwendung im Programm könnte folgendermaßen aussehen: Sollte bei einem Wor
 
 
 \section{Comparative Manifesto Project}
+Als Quellen für dieses Kapitel wurden \cite{csta} und \cite{cmp} verwendet.
 Das Comparative Manifesto Project, kurz CMP, beschäftigt sich mit der Analyse politischer Texte und Standpunkte einer Vielzahl von Ländern und Parteien weltweit. Als Resultat stehen dem Nutzer der CMP Datenbank ausgiebige Informationen über die jeweiligen Texte zur Verfügung - und zwar in maschinell verwertbarer Form.
 Das Auswerten der Texte erfolgt jedoch nicht durch ein Programm, sondern manuell durch eine effiziente Aufteilung auf verschiedene Arbeiter. Dieses Vorgehen wird Crowd-Sourcing genannt. Dabei werden die Texte in kompakte Pakete aufgeteilt und weltweit an verschiedene Arbeiter verteilt. Dieses Vorgehen hat einige Vorteile:
 \begin{itemize}
@@ -256,6 +265,7 @@ Das Manifesto Project enthält seit 1945 ungefähr 4000 Texte von über 1000 Par
 Die Daten können manuell über eine minimalistische Oberfläche abgefragt werden. Alternativ steht, nach einer initialen Registrierung, auch eine API zur automatischen Abfrage zur Verfügung.
 
 \section{Repräsentative Demokratie in Deutschland}
+Die Informationen über dieses Kapitel stammen aus \cite{bundestag}, \cite{bundesregierung} und \cite{wikipedia}.
 \begin{quote}
 "Die repräsentative Demokratie bezeichnet eine demokratische Herrschaftsform, bei der politische Entscheidungen und die Kontrolle der Regierung nicht unmittelbar vom Volk, sondern von einer Volksvertretung, zum Beispiel dem Parlament, ausgeübt werden.
 Bürgerinnen und Bürger treffen politische Entscheidungen nicht selbst, sondern überlassen sie auf Zeit gewählten Vertretern, die für sie als Stellvertreter tätig sind. Die Bürger beteiligen sich aber an Wahlen und wirken in Parteien, Verbänden und Initiativen mit."
