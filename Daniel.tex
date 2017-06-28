@@ -2,21 +2,21 @@
 
 \definecolor{rahmen}{rgb}{1,.7,.7}
 
-\section{Big Data und Social Bots}
-Mit der rasch fortschreitenden Verbreitung des Internets im Alltag der Gesellschaft stellen wir heute fest, dass Soziale Medien eine wichtige Informationsquelle für Teile der Bevölkerung darstellen. Die Daten der einzelnen Informationsdienstleister sind dort gebündelt und können von den publizierenden Personen ohne Umwege an den Leser bereitgestellt werden. Im politischen Kontext sind weite Teile von Politikern, Parteien und Einrichtungen in den sozialen Medien präsent. Diese können dem Wähler dort zusätzlich simplifizierte Inhalte bereitstellen, die ohne Umwege und unkommentiert zur Verfügung stehen. In den USA stellt das soziale Netzwerk Twitter sogar eine Hauptinformationsquelle des Präsidenten dar.
+\section{Einleitung}
+Mit der rasch fortschreitenden Verbreitung des Internets im Alltag der Gesellschaft stellen wir heute fest, dass Soziale Medien eine wichtige Informationsquelle für Teile der Bevölkerung darstellen. Die Daten der einzelnen Informationsdienstleister sind dort gebündelt und können dem Leser ohne Umwege von den publizierenden Personen bereitgestellt werden. Im politischen Kontext sind weite Teile von Politikern, Parteien und Einrichtungen in den sozialen Medien präsent. Diese können dem Wähler dort zusätzlich simplifizierte Inhalte bereitstellen, die direkt und unkommentiert zur Verfügung stehen. In den USA stellt das soziale Netzwerk Twitter sogar eine Hauptkommunikationsquelle des Präsidenten dar.
 \newline
-Doch die direkte Kommunikation mit dem Nutzer stellt diesen auch vor ganz neue Herausforderungen. Seit einiger Zeit tauchen im Internet häufig sogenannte Fake News auf. Darunter versteht man Nachrichten, die nach außen hin erstmal seriös wirken, sich bei genauerer Recherche jedoch als falsch erweisen. Da der durchschnittliche Nutzer selten die Quellen von Berichten überprüft, stellt dies ein zunehmendes Problem dar. Eng damit verknüpft ist der Einsatz von Social Bots. Unter einem Social Bot versteht man ein Programm, welches automatisiert Tätigkeiten in sozialen Netzwerken ausführt, beispielsweise das Upvoten oder Erstellen von Beiträgen. Durch die Ranking-Algorithmen, die die Prioritäten von Beiträgen bewerten, kann so die Anzeige von Beiträgen manipuliert werden. Das Erkennen von Bots funktioniert teilweise sehr einfach, da nur vorgefertigte Texte verwendet werden. Einige Programme sind jedoch komplexer geschrieben und von realen Nutzern nur schwer unterscheidbar.
+Doch die direkte Kommunikation mit dem Nutzer stellt diesen auch vor ganz neue Herausforderungen. Seit einiger Zeit tauchen im Internet häufig sogenannte Fake News auf. Darunter versteht man Nachrichten, die nach außen hin seriös wirken, sich bei genauerer Recherche jedoch als falsch erweisen. Da der durchschnittliche Nutzer selten die Quellen von Berichten überprüft, stellt dies ein zunehmendes Problem dar. Eng damit verknüpft ist der Einsatz von Social Bots. Unter einem Social Bot versteht man ein Programm, welches automatisiert Tätigkeiten in sozialen Netzwerken ausführt, beispielsweise das Upvoten oder Erstellen von Beiträgen. Durch die Ranking-Algorithmen, die die Prioritäten von Beiträgen bewerten, kann so die Anzeige von Beiträgen manipuliert werden. Das Erkennen von Bots funktioniert teilweise sehr einfach, da nur vorgefertigte Texte verwendet werden. Einige Programme sind jedoch komplexer geschrieben und von realen Nutzern nur schwer unterscheidbar.
 \newline
 Mit der Initiative der Bundesregierung gegen Hasskommentare im Netz stehen die Betreiber der Netzwerke nun vor einer großen Herausforderung: Millionen Beiträge müssen auf illegale oder unpassende Inhalte überprüft werden. Die große Anzahl an Postings verhindert dabei nahezu den Einsatz menschlicher Moderatoren, es braucht eine automatische Überprüfung. Ein Ansatz zur automatischen Analyse von Texten liefert dieses Paper. Anhang des vorgestellten Modells soll es möglich sein, Texte zu Verstehen und diese in gewisse Dimensionen einzuordnen. Anhand dieser Einordnung kann so die inhaltliche Position des Textes bzw. des Autors ermittelt werden. Im den nachfolgenden Kapiteln werden die einzelnen Schritte zur Analyse und Einordnung des Textes geschildert und anschließend anhand von einigen politischen Texten vorgenommen.
 
 \section{Akquirierung von Texten}
-Um politische Texte analysieren zu können müssen zuallererst passende Texte beschafft werden. Quellen für solche Texte sind verschiedene vorhanden, welche mehr oder weniger gut geeignet sind, um automatisch analysiert zu werden. Im Folgenden werden drei Kategorien kurz vorgestellt.
+Um politische Texte analysieren zu können müssen als erstes passende Texte gefunden werden. Quellen für solche Texte sind verschiedene vorhanden, welche mehr oder weniger gut geeignet sind, um automatisch analysiert zu werden. Im Folgenden werden drei Kategorien kurz vorgestellt.
 
 \subsection{Textbasiert}
 Rein auf den gedruckten Text ausgelegte Medien, wie beispielsweise Zeitungen oder Magazine, sind für den Computer im Allgemeinen schwer auszuwerten. Die Daten müssten manuell eingescannt werden und anschließend per Bildbearbeitungsprogramm in ein geeignetes Zeichenformat übersetzt werden. 
 
 \subsection{Audio/Video}
-Medien, welche Nachrichten per Audio oder Video übertragen, sind ebenfalls relativ uninteressant für die automatische Analyse. Hierzu zählen beispielsweise Fernsehsendungen, Radiosender oder auch Podcasts im Internet. Ähnlich wie bei den rein gedruckten Medien besteht auch hier das Problem, die Textinformationen in ein für den Computer „leserliches“ Format zu konvertieren. Insbesondere bei akustischen Signalen, also gesprochenem Text, ist diese Analyse sehr aufwändig und Fehleranfällig. 
+Medien, welche Nachrichten per Audio oder Video übertragen, sind ebenfalls relativ uninteressant für die automatische Analyse. Hierzu zählen beispielsweise Fernsehsendungen, Radiosender oder auch Podcasts im Internet. Ähnlich wie bei den rein gedruckten Medien besteht auch hier das Problem, die Textinformationen in ein für den Computer „leserliches“ Format zu konvertieren. Insbesondere bei akustischen Signalen, also gesprochenem Text, ist diese Analyse sehr aufwändig und fehleranfällig. 
 
 \subsection{Internet}
 Das Internet gilt als die Beste Bezugsquelle für maschinell auswertbare Texte. Jedoch sind auch hier Einschränkungen vorhanden, da die Texte ebenfalls für den menschlichen Leser optimiert sind. Im Internet kann man einige Bezugsquellen unterscheiden:
@@ -31,7 +31,7 @@ Soziale Medien wie Facebook oder Twitter hingegen stellen selbst häufig eine so
 
 \section{Datenbanken}
 Das nachfolgente Teilkapitel orientiert sich inhaltlich an \cite{datenbanken}.
-Im Zuge der Textverarbeitung trifft man immer wieder auf den Begriff der Datenbanken. Diese sind im ein wichtiges Werkzeug, um die Textmanipulation sinnvoll zu unterstützen. Eine Datenbank stellt die nötigen Funktionen zur Verfügung, um große Datenmengen effizient zu speichern, zu analysieren und zu verarbeiten. Im Bereich der relationalen Datenbanken ist die Sprache SQL (Structured Query Language) weitgehend verbreitet. Diese bietet unterschiedliche Möglichkeiten an, die gespeicherten Daten abzufragen und zu manipulieren:
+Im Zuge der Textverarbeitung trifft man immer wieder auf den Begriff der Datenbanken. Diese sind im ein wichtiges Werkzeug, um die Textmanipulation sinnvoll zu unterstützen. Eine Datenbank stellt die nötigen Funktionen zur Verfügung, um große Datenmengen effizient zu speichern, zu analysieren und zu verarbeiten. Im Bereich der relationalen Datenbanken ist die Sprache SQL (Structured Query Language) weit verbreitet. Diese bietet unterschiedliche Möglichkeiten an, die gespeicherten Daten abzufragen und zu manipulieren:
 \begin{itemize}
 \item INSERT
 \item UPDATE
@@ -48,7 +48,7 @@ Wichtig hierbei ist ebenfalls der Begriff der Normalisierung. Um Konsitenz zu wa
 \item 3NF - Dritte Normalform
 \item BCNF - Boyce-Codd Normalform
 \end{itemize}
-Die Formen sind hierbei anhand ihrer Striktheit aufsteigend angeordnet. Als ein Beispiel aus dem Kontext der politischen Textanalyse wird ein kurzes Schema zur Speicherung politischer Texte vorgestellt. Relevante Informationen sind hierbei die Herkunft des Textes (Politiker, Partei) sowie eine eindeutige Zuordnung anhand einer Identifikationsnummer. \\
+Die Formen sind hierbei anhand ihrer Striktheit aufsteigend angeordnet. Als ein Beispiel aus dem Kontext der politischen Textanalyse wird ein kurzes Schema zur Speicherung politischer Texte vorgestellt. Diese befindet sich in Tabelle \ref{redundanzen}. Relevante Informationen sind hierbei die Herkunft des Textes (Politiker, Partei) sowie eine eindeutige Zuordnung anhand einer Identifikationsnummer. \\
 \begin{table}
 \begin{tabular}{llllll}
 \hline
@@ -61,9 +61,10 @@ ID & Partei & Kürzel & Vorname & Nachname & Text \\
 5 & Sozialdemokratische Partei Deutschlands & SPD & Sigmar & Gabriel & Text5 \\
 \hline
 \end{tabular}
-\caption{Beispieldaten mit Redundanzen}
+\caption{\label{redundanzen} Beispieldaten mit Redundanzen}
 \end{table}
-Offensichtlich werden hier die Daten der Partei sowie der Politiker redundant gespeichert, was suboptimal ist. Um einer möglichst hohen Normalform zu entsprechen wird die Tabelle in drei Tabellen aufgespalten: Je eine Tabelle für die Parteien, die Politiker und die Texte: \newline
+Offensichtlich werden hier die Daten der Partei sowie der Politiker redundant gespeichert, was suboptimal ist. Um einer möglichst hohen Normalform zu entsprechen wird die Tabelle in drei Tabellen aufgespalten, zu sehen in Tabelle \ref{korrigiert}.
+\newline
 \begin{table}
 \begin{tabular}{lll}
 \hline
@@ -94,14 +95,15 @@ ID & Politiker-ID & Text \\
 5 & 2 & Text5 \\
 \hline
 \end{tabular}
-\caption{Beispieltabellen in Normalform}
+\caption{ \label{korrigiert} Beispieltabellen in Normalform}
 \end{table}
 \\
 Die Identifikationsnummer aller drei Tabellen kommt hierbei auch als Schlüssel ins Spiel. Über den Schlüssel bzw. Index können Einträge in einer Tabelle eindeutig identifiziert werden, was sehr effiziente Abfragen ermöglicht. Andererseits werden eben jene IDs in anderen Tabellen als sogenannte Fremdschlüssel verwendet: Sie zeigen auf Schlüssel anderer Tabellen, um Redundanzen zu vermeiden. In obigem Beispiel sind die \textit{Partei-ID} und die \textit{Politiker-ID} Fremdschlüssel. Im Hinblick auf Fremdschlüssel ist besonders auf die Konsistenz der Datensätze zu achten. Wäre beispielsweise der Politiker \textit{Sigmar Gabriel} nicht vorhanden, also die \textit{Politiker-ID} 2 nicht vergeben, so würden die anderen Tabellen auf ungültige Datensätze verweisen.
 
 \section{Textvorverarbeitung}
 Das Kapitel der Textverarbeitung setzt sich aus den den folgenden Quellen zusammen: \cite{deutschinfo}, \cite{openthesaurus}, \cite{morphy}, \cite{wikipedia}, \cite{webmining} und \cite{zeichenkodierung}.
-Da die Texte, so wie sie im Internet zur Verfügung gestellt werden, für das Lesen durch den Menschen optimiert sind, müssen noch einige zusätzliche Schritte ausgeführt werden, damit die Daten auch effektiv durch den Computer ausgewertet werden können. Anhand von dem folgenden Beispieltext wird die Notwendigkeit für eine solche Vorverarbeitung deutlich. Die Schritt, die hierbei zur Aufbereitung des Textes durchgeführt werden, werden später in der Ausarbeitung detailliert beschrieben. Der Text ist ein Beitrag von Christian Lindner über Facebook.
+\newline
+Da Texte, so wie sie im Internet zur Verfügung gestellt werden, für das Lesen durch den Menschen optimiert sind, müssen noch einige zusätzliche Schritte ausgeführt werden, damit die Daten auch effektiv durch den Computer ausgewertet werden können. Anhand von dem folgenden Beispieltext wird die Notwendigkeit für eine solche Vorverarbeitung deutlich. Die Schritte, die hierbei zur Aufbereitung des Textes durchgeführt werden, werden später in der Ausarbeitung detailliert beschrieben. Der Text ist ein Beitrag von Christian Lindner über Facebook.
 \newline
 \begin{quote}
 \colorbox{rahmen}{"Wir} wollen scheinbare \colorbox{rahmen}{Gegensätze} verbinden\colorbox{rahmen}{. Umweltschutz} muss nicht wie bei \colorbox{rahmen}{Rot-Grün} die \colorbox{rahmen}{Wirtschaft} fesseln\colorbox{rahmen}{. Man} kann die \colorbox{rahmen}{Sicherheit stärken}, ohne \colorbox{rahmen}{Bürgerrechte einzuschränken. Soziale Verantwortung übernimmt} man besser mit \colorbox{rahmen}{Bildung} als mit \colorbox{rahmen}{Umverteilung.}"
@@ -129,7 +131,7 @@ wollen scheinbare gegensatz verbinden umweltschutz muss nicht rot gruen wirtscha
 Wie man sieht ist der Text in dieser Form für den Menschen nur noch bedingt lesbar. Zwar sind noch alle wichtigen Begriffe vorhanden, die meisten grammatikalischen Notwendigkeiten sind jedoch verloren gegangen.
 
 \subsection{Zeichenkodierung}
-Die Zeichenkodierung ist ein Thema der Darstellung von Buchstaben und Zeichen im Bereich der IT. Grundsätzlich versteht ein Prozessor nur Datenreihen von binären Werten. Durch das Zusammenfassen dieser Werte zu Bytes können im Binärsystem unterschiedliche Zahlensysteme umgerechnet und dargestellt werden. Gerechnet wird überwiegend im Dezimalsystem, wobei auch das Hexadezimalsystem eine häufige Anwendung findet. In den meisten Programmier- bzw. Skriptsprachen entspricht die Länger einer Variablen ein Byte bis acht Byte, jenachdem ob Ganzzahlen oder Fließkommazahlen dargestellt werden und je nach Genauigkeit. Die Darstellung von Zeichen ist hierbei eigentlich ein Spezialfall, da für diese keine arithmetischen Operationen angedacht sind und diese somit besonders interpretiert werden können. Das Problem ist auch hier schnell identifiziert: Ein Zeichen mit der Länge 1 Byte kann 255 verschiedene Werte darstellen, ein Wert wird als Escape-Sequenz verwendet. Während 255 Zeichen für für die Anwendung im europäischen Raum ausreicht, ist dies für den asiatischen Raum zu wenig. Auf diese Weise haben sich verschiedene Kodierungen entwickelt, um möglichst vielen Anwendungsfällen zu genügen:
+Die Zeichenkodierung ist ein Thema der Darstellung von Buchstaben und Zeichen im Bereich der IT. Grundsätzlich versteht ein Prozessor nur Datenreihen von binären Werten. Durch das Zusammenfassen dieser Werte zu Bytes können im Binärsystem unterschiedliche Zahlensysteme umgerechnet und dargestellt werden. Gerechnet wird überwiegend im Dezimalsystem, wobei auch das Hexadezimalsystem eine häufige Anwendung findet. In den meisten Programmier- bzw. Skriptsprachen entspricht die Länge einer Variablen 1 Byte bis 8 Byte, jenachdem ob Ganzzahlen oder Fließkommazahlen dargestellt werden und je nach Genauigkeit. Die Darstellung von Zeichen ist hierbei eigentlich ein Spezialfall, da für diese keine arithmetischen Operationen angedacht sind und diese somit besonders interpretiert werden müssen. Das Problem ist auch hier schnell identifiziert: Ein Zeichen mit der Länge 1 Byte kann 255 verschiedene Werte darstellen, ein Wert wird als Escape-Sequenz verwendet. Während 255 Zeichen für für die Anwendung im europäischen Raum ausreicht, ist dies für den asiatischen Raum zu wenig. Auf diese Weise haben sich verschiedene Kodierungen entwickelt, um möglichst vielen Anwendungsfällen zu genügen:
 \begin{itemize}
 \item{ASCII} Mit 128 Bit Länge können Zahlen, Buchstaben und Satzzeichen sowie einige weitere Sonderzeichen dargestellt werden. Durch den Unterschied Groß- und Kleinschreibung ist das Alphabet doppelt vorhanden. Die restlichen Bits sind ungenutzt.
 \item{ISO-8859} Doppelt so lang wie ein ASCII-Zeichen können hier zusätzliche Sonderzeichen wie Umlaute gespeichert werden. Der ISO-Standard umfasst eine breite Palette an Versionen.
@@ -139,7 +141,7 @@ Da mit zunehmender Verbreitung des Internets und der damit einhergehenden weltwe
 
 \subsection{Reguläre Ausdrücke	}
 Reguläre Ausdrücke werden in der Informationsverarbeitung bestimmte Muster aus Texten erkennen und extrahieren zu können. Das zu erkennende Muster wird hierbei ebenfalls als Zeichenkette mit spezieller Syntax übergeben. Hierbei werden über lateinische Zeichen, arabische Ziffern bis hin zu diversen Sonderzeichen die meisten Anwendungsfälle abgedeckt.
-Eine sehr häufige Verwendung finden reguläre Ausdrücke im Bereich der Validierung von Nutzereingaben auf Webseiten, insbesondere in Formularen zur Datenübergabe. Einige bekannte Beispiele hierfür sind:
+Eine sehr häufige Verwendung finden reguläre Ausdrücke im Bereich der Validierung von Nutzereingaben auf Webseiten, insbesondere in Formularen zur Datenübergabe. Einige bekannte Beispiele hierfür sind in Tabelle  \ref{tabelle} zu sehen.
 \newline
 \begin{table}
 \begin{tabular}{llll}
@@ -152,11 +154,11 @@ E-Mail & /[a-zA-Z]+@[a-zA-Z]+.(de|com|net)/ & anonymous@uni-ulm.de \\
 Telefonnummer & /[0-9]+[ -]{1,3}[0-9 ]{4,}/ & 0190 - 123 456 \\
 \hline
 \end{tabular}
-\caption{Beispiele für Reguläre Ausdrücke und ihre Anwendung}
+\caption{\label{tabelle} Beispiele für Reguläre Ausdrücke und ihre Anwendung}
 \end{table}
 
 \subsection{Deutsche Grammatik	}
-Im deutschen lassen sich Worte durch sogenannte Wortarten kategorisieren. Zu den Wortarten zählen: \\
+Im deutschen lassen sich Worte durch sogenannte Wortarten kategorisieren. Diese sind in Tabelle \ref{wortarten} zu sehen. \\
 \begin{table}
 \center
 \begin{tabular}{ll}
@@ -173,9 +175,9 @@ Konjunktionen & und, oder \\
 Präpositionen & an, auf \\
 \hline
 \end{tabular}
-\caption{Wortarten mit Beispielen}
+\caption{\label{wortarten} Wortarten mit Beispielen}
 \end{table}
-Im allgemeinen können viele Sätze auf eine Grundform reduziert werden: Subjekt - Verb - Objekt. Anhand dieser Form ist es für ein Programm einfach,
+Im allgemeinen können viele Sätze auf eine Grundform reduziert werden: Subjekt - Prädikat - Objekt. Anhand dieser Form ist es für ein Programm einfach,
 einen Aussage aus einem Satz herauszuarbeiten. Da Sätze jedoch häufig verschachtelt und detaillierter ausformuliert sind, müssen diese weitestgehend vereinfacht
 werden. Ein Schritt hierzu ist das Entfernen nicht-sinngebender Wortarten aus dem Text, also solcher Worte, die selbst keine essentielle Information beitragen 
 sondern lediglich zur Wahrung der grammatikalischen Korrektheit im Text vorhanden sind. Die Wortarten im Text reduzieren sich damit auf Nomen, Adjektive, Verben
@@ -204,7 +206,7 @@ Entnimmt man dem Text als zentrale Information, dass Peter gestern in der Schule
 Hierfür stellt \textit{OpenThesaurus} eine umfassende Datenbank zur Verfügung, die Informationen über Worte, ihre Synonyme und noch weitere Eigenschaften enthält. Der Funktionsumfang enthält dabei den Export der kompletten Datenbank oder die Benutzung der internen API unter \textit{GNU Lesser General Public License (LGPL}.
 
 \subsection{Rechtschreibprüfung und Metriken}
-Da politische Texte vorwiegend von tatsächlichen Personen verfasst und nicht automatisiert erstellt werden, können sich in diese Texte natürlich Rechtschreibfehler einschleichen. Im Rahmen politischer Texte ist dies zwar unwahrscheinlich, da die Texte mehrfach von Experten Korrektur gelesen werden, jedoch nicht unmöglich. Werden hingegen Texte aus sozialen Medien oder ähnlichen Quellen analysiert, so steigt die Wahrscheinlichkeit, dass Wörter fehlerhaft geschrieben werden. Dabei können drei Fehler unterschieden werden:
+Da politische Texte vorwiegend von tatsächlichen Personen verfasst und nicht automatisiert erstellt werden, können sich in diese Texte Rechtschreibfehler einschleichen. Im Rahmen politischer Texte ist dies zwar unwahrscheinlich, da die Texte mehrfach von Experten Korrektur gelesen werden, jedoch nicht unmöglich. Werden hingegen Texte aus sozialen Medien oder ähnlichen Quellen analysiert, so steigt die Wahrscheinlichkeit, dass Wörter fehlerhaft geschrieben werden. Dabei können drei Fehler unterschieden werden:
 \begin{itemize}
 \item Hinzufügen eines Extrabuchstabens: Google - Gooogle
 \item Entfernen eines relevanten Buchstabens: Google - Gogle
@@ -212,7 +214,7 @@ Da politische Texte vorwiegend von tatsächlichen Personen verfasst und nicht au
 \end{itemize}
 Um beim Auftreten solcher Fehler dennoch ein korrektes Wort erkennen zu können werden sogenannte Metriken eingeführt. Diese beschreiben, ähnlich wie in der Mathematik, den Abstand zweier Zeichenketten. Dabei gilt:
 \begin{itemize}
-\item \( ||s1 - s2|| = 0 \) - der Abstand eines Wortes zu sich selbst ist Null
+\item \( ||s1 - s1|| = 0 \) - der Abstand eines Wortes zu sich selbst ist Null
 \item \( ||s1 - s2|| > 0, s1 \neq s2 \) - der Abstand zweier unterschiedlicher Worte ist größer Null
 \item \( ||s1 - s2|| = ||s2 - s1|| \) - Kommutativität, die Wörter dürfen vertauscht werden
 \item \( ||s1 - s3|| \leq ||s1 - s2|| + ||s2 - s3|| \) - Dreiecksungleichung, der kürzeste Abstand ist der direkte Weg
@@ -271,7 +273,7 @@ Die Informationen über dieses Kapitel stammen aus \cite{bundestag}, \cite{bunde
 Bürgerinnen und Bürger treffen politische Entscheidungen nicht selbst, sondern überlassen sie auf Zeit gewählten Vertretern, die für sie als Stellvertreter tätig sind. Die Bürger beteiligen sich aber an Wahlen und wirken in Parteien, Verbänden und Initiativen mit."
 \end{quote}
 \cite{bundestag}
-Die Bundesregierung in Deutschland setzt sich aus aus der Bundeskanzlerin und den verschiedenen Bundesministerien zusammen. Aktuell besteht die Regierung aus einer Koalition von CDU/CSU und SPD. Eine kurze Übersicht bietet folgende Tabelle: \\
+Die Bundesregierung in Deutschland setzt sich aus aus der Bundeskanzlerin und den verschiedenen Bundesministerien zusammen. Aktuell besteht die Regierung aus einer Koalition von CDU/CSU und SPD. Eine kurze Übersicht bietet die Tabelle \ref{bundesregierung}. \\
 \begin{table}
 \begin{tabular}{lll}
 \hline
@@ -298,7 +300,7 @@ Peter Altmaier & CDU & Chef des Bundeskanzleramtes und Bundesminister für  \\
 & & besondere Aufgaben \\
 \hline
 \end{tabular}
-\caption{Übersicht Bundesregierung}
+\caption{ \label{bundesregierung} Übersicht Bundesregierung}
 \end{table}
 Im Gegensatz dazu sind im Bundestag alle gewählten Parteien vertreten, die über die "Fünf Prozent Hürde" gekommen sind. Dazu gehören, abgesehen von CDU/CSU und SPD, Die Linke und BÜNDNIS 90/DIE GRÜNEN. Weitere wichtige Parteien im politischen Spektrum sind die FDP und die AfD. Wichtige Personen in diesem Zusammenhang sind die Parteivorsitzenden und deren Stellvertreter: \\
 \begin{table}
